@@ -96,6 +96,12 @@
   border: 2px solid rgba(255,255,255,0.8);
   transition: opacity 0.3s ease;
 }
+@media (max-width: 600px) {
+  .rem-img { width: 80px; }
+  .rem-speech { font-size: 11px; padding: 6px 10px; max-width: 140px; }
+  .rem-container { bottom: 6px; right: 6px; }
+  .rem-sparkle { font-size: 12px; }
+}
 
 /* Floating sparkles */
 .rem-sparkle {
@@ -665,7 +671,7 @@ async function selectSubject(subjectId) {
     }
 
     // Set default types if none
-    if (app.currentTypes.length === 0) app.currentTypes = [...availableTypes];
+    if (app.currentTypes.length === 0) app.currentTypes = [availableTypes[0]];
 
     document.getElementById('navTitle').textContent = subj.icon + ' ' + subj.name;
     document.getElementById('navBack').classList.remove('hidden');
@@ -855,6 +861,7 @@ function renderQuestion() {
       <div class="q-stem">${q.stem}</div>`;
 
   // Render answer area based on type
+  let needsSubmitBtn = false;
   if (q._type === 'danxuan') {
     html += renderSingleChoice(q);
   } else if (q._type === 'duoxuan') {
@@ -863,8 +870,10 @@ function renderQuestion() {
     html += renderTrueFalse(q);
   } else if (q._type === 'tiankong') {
     html += renderFillBlank(q);
+    needsSubmitBtn = true;
   } else {
     html += renderTextAnswer(q);
+    needsSubmitBtn = true;
   }
 
   // Feedback
@@ -880,7 +889,7 @@ function renderQuestion() {
   // Action buttons
   html += `<div class="q-actions">`;
   if (!app.showAnswer) {
-    html += `<button class="btn btn-primary" id="btnSubmit" onclick="submitAnswer()">✅ 提交答案 <span class="kbd-hint">Enter</span></button>`;
+    html += `<button class="btn btn-primary" id="btnSubmit" onclick="submitAnswer()" style="display:${needsSubmitBtn ? 'inline-flex' : 'none'}">✅ 提交答案 <span class="kbd-hint">Enter</span></button>`;
   } else {
     if (app.currentIndex < app.questions.length - 1) {
       html += `<button class="btn btn-primary" onclick="nextQuestion()">下一题 → <span class="kbd-hint">→</span></button>`;
@@ -890,17 +899,6 @@ function renderQuestion() {
   }
   html += `</div></div>`;
 
-  // Question navigator
-  html += `<div class="card" style="padding:14px 18px"><div class="q-nav">`;
-  for (let i = 0; i < app.questions.length; i++) {
-    const a = app.answers[i];
-    let cls = 'q-nav-dot';
-    if (i === app.currentIndex) cls += ' current';
-    else if (a && a.isCorrect) cls += ' done-right';
-    else if (a && !a.isCorrect) cls += ' done-wrong';
-    html += `<div class="${cls}" onclick="jumpTo(${i})">${i + 1}</div>`;
-  }
-  html += `</div></div>`;
 
   render(html);
 
@@ -998,7 +996,7 @@ function renderTextAnswer(q) {
 function selectOption(key) {
   if (app.showAnswer) return;
   app.answers[app.currentIndex] = { userAnswer: key };
-  renderQuestion();
+  setTimeout(() => submitAnswer(), 150);
 }
 
 function toggleMultiOption(key) {
@@ -1016,7 +1014,7 @@ function toggleMultiOption(key) {
 function selectTF(val) {
   if (app.showAnswer) return;
   app.answers[app.currentIndex] = { userAnswer: val };
-  renderQuestion();
+  setTimeout(() => submitAnswer(), 150);
 }
 
 function submitAnswer() {
