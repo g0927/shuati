@@ -1,1503 +1,243 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>期末刷题平台 - PLC | 单片机 | 电力电子 | 自动控制</title>
-<style>
-/* ====== CSS Variables & Theme ====== */
-:root {
-  --bg: #f0f4f8; --card: #fff; --text: #1e293b; --text2: #64748b;
-  --border: #e2e8f0; --shadow: 0 4px 24px rgba(0,0,0,0.08);
-  --radius: 16px; --radius-sm: 10px;
-  --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
-  --success: #10b981; --danger: #ef4444; --warning: #f59e0b; --info: #3b82f6;
-  --font: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
-}
-[data-theme="dark"] {
-  --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --text2: #94a3b8;
-  --border: #334155; --shadow: 0 4px 24px rgba(0,0,0,0.3);
-}
-[data-theme="rem"] {
-  --bg: #e8f0fe; --card: #fff; --text: #2c3e50; --text2: #6b7d95;
-  --border: #c8daf5; --shadow: 0 4px 24px rgba(91,155,213,0.12);
-  --success: #5b9bd5; --danger: #e8878a; --warning: #f0c060; --info: #4a8bc9;
-  --radius: 20px; --radius-sm: 14px;
-}
-[data-theme="rem"] body {
-  background: linear-gradient(135deg, #e8f2fc 0%, #f0eef8 30%, #fdf2f4 70%, #e8f2fc 100%);
-  background-attachment: fixed;
-}
-[data-theme="rem"] .nav {
-  background: linear-gradient(90deg, #fff 0%, #f8faff 50%, #fff 100%);
-  border-bottom: 2px solid #d0e2f8;
-}
-[data-theme="rem"] .card {
-  background: #ffffff; border: 1px solid #e0ecfa;
-  box-shadow: 0 2px 16px rgba(91,155,213,0.06);
-}
-[data-theme="rem"] .btn-primary {
-  background: linear-gradient(135deg, #6db3e0, #4a8bc9);
-  box-shadow: 0 4px 14px rgba(74,139,201,0.25);
-}
-[data-theme="rem"] .btn-primary:hover {
-  background: linear-gradient(135deg, #5ba1d4, #3d7ab8);
-  box-shadow: 0 6px 20px rgba(74,139,201,0.35);
-}
-[data-theme="rem"] .subject-card:hover { border-color: #5b9bd5; box-shadow: 0 8px 24px rgba(91,155,213,0.15); }
-[data-theme="rem"] .mode-card.sel { border-color: #4a8bc9; background: #f0f6fc; }
-[data-theme="rem"] .type-chip.sel { background: #4a8bc9; border-color: #4a8bc9; }
-[data-theme="rem"] .hero h1 {
-  background: linear-gradient(135deg, #4a8bc9, #6db3e0, #8fc5f0);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-[data-theme="rem"] .result-score {
-  background: linear-gradient(135deg, #4a8bc9, #6db3e0);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-[data-theme="rem"] .option.selected { border-color: #5b9bd5; background: #f0f6fc; }
-[data-theme="rem"] .option:hover { border-color: #7bb8e0; }
-[data-theme="rem"] .option.correct { border-color: #5b9bd5 !important; background: #e8f4e8 !important; }
-[data-theme="rem"] .option.wrong { border-color: #e8878a !important; background: #fef0f0 !important; }
-[data-theme="rem"] .progress-bar-fill { background: linear-gradient(90deg, #4a8bc9, #6db3e0); }
-[data-theme="rem"] .q-badge.type { background: #e8f2fc; color: #4a8bc9; }
-[data-theme="rem"] .feedback.correct-fb { background: #e8f4e8; color: #3a7a4a; }
-[data-theme="rem"] .feedback.wrong-fb { background: #fef0f0; color: #b8444a; }
-[data-theme="rem"] .option-key { background: #e8f2fc; color: #4a8bc9; }
-[data-theme="rem"] .option.selected .option-key { background: #5b9bd5; color: #fff; }
-[data-theme="rem"] ::-webkit-scrollbar-thumb { background: #c8daf5; }
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>期末刷题</title>
+    <link rel="stylesheet" href="./styles.css?v=20260625-wrongbook">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="homeView" class="view">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">期末刷题</p>
+            <h1>考前冲刺</h1>
+          </div>
+          <div class="header-actions">
+            <button class="icon-btn" id="themeToggleBtn" type="button" aria-label="切换主题" title="切换主题">☾</button>
+            <button class="icon-btn" id="clearSessionBtn" type="button" aria-label="重置当前选择" title="重置当前选择">↺</button>
+          </div>
+        </header>
 
-/* ====== Rem Image & Encouragement ====== */
-.rem-container {
-  position: fixed; bottom: 12px; right: 12px; z-index: 50;
-  display: flex; flex-direction: column; align-items: center;
-  pointer-events: none; user-select: none;
-}
-.rem-speech {
-  background: #fff; color: #4a7db5; padding: 8px 14px;
-  border-radius: 16px 16px 4px 16px; font-size: 13px; font-weight: 700;
-  margin-bottom: 6px; box-shadow: 0 2px 12px rgba(74,125,181,0.18);
-  white-space: nowrap; max-width: 200px; text-align: center;
-  animation: remBounce 2.5s ease-in-out infinite;
-  border: 1.5px solid #dce8f5;
-}
-@keyframes remBounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-.rem-chibi {
-  cursor: pointer; pointer-events: auto; transition: transform 0.3s;
-}
-.rem-chibi:hover { transform: scale(1.05); }
-.rem-chibi:active { transform: scale(0.97); }
-.rem-img {
-  width: 130px; height: auto; border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(74,125,181,0.25);
-  border: 2px solid rgba(255,255,255,0.8);
-  transition: opacity 0.3s ease;
-}
-@media (max-width: 600px) {
-  .rem-img { width: 80px; }
-  .rem-speech { font-size: 11px; padding: 6px 10px; max-width: 140px; }
-  .rem-container { bottom: 6px; right: 6px; }
-  .rem-sparkle { font-size: 12px; }
-}
+        <section class="priority-panel" aria-label="今日优先刷">
+          <div class="priority-top">
+            <div>
+              <p class="label">今日优先刷</p>
+              <h2 id="priorityTitle">-</h2>
+            </div>
+            <span id="priorityCountdown">-</span>
+          </div>
+          <p class="priority-meta" id="priorityMeta">按考试日期自动推荐最近科目。</p>
+          <div class="priority-breakdown" aria-label="推荐构成">
+            <span id="priorityUnseen">未刷 0</span>
+            <span id="priorityDue">待复习 0</span>
+            <span id="priorityWeak">薄弱 0</span>
+          </div>
+          <button class="priority-start" id="priorityStartBtn" type="button">按推荐开始</button>
+        </section>
 
-/* Floating sparkles */
-.rem-sparkle {
-  position: fixed; pointer-events: none; z-index: 49;
-  font-size: 16px; animation: sparkleFloat 2s ease-in-out infinite;
-}
-@keyframes sparkleFloat {
-  0%,100% { transform: translateY(0) scale(1); opacity: 0.5; }
-  50% { transform: translateY(-15px) scale(1.3); opacity: 1; }
-}
-.rem-sparkle:nth-child(2) { animation-delay: 0.6s; font-size: 12px; }
-.rem-sparkle:nth-child(3) { animation-delay: 1.2s; font-size: 14px; }
-.rem-sparkle:nth-child(4) { animation-delay: 0.3s; font-size: 18px; }
-.rem-sparkle:nth-child(5) { animation-delay: 0.9s; font-size: 11px; }
+        <section class="panel planner" aria-label="组卷">
+          <div class="field-block">
+            <p class="label">科目</p>
+            <div class="chip-grid subject-grid" id="subjectChips"></div>
+          </div>
+          <div class="field-block">
+            <p class="label">题型</p>
+            <div class="chip-grid type-grid" id="typeChips"></div>
+          </div>
+          <div class="field-block">
+            <div class="label-line">
+              <p class="label">本组题数</p>
+              <span id="availableHint">共 0 题</span>
+            </div>
+            <div class="count-row">
+              <input id="countInput" type="number" min="1" inputmode="numeric" value="20" aria-label="本组题数">
+              <div class="preset-grid">
+                <button class="preset-btn" type="button" data-count="10">10</button>
+                <button class="preset-btn" type="button" data-count="20">20</button>
+                <button class="preset-btn" type="button" data-count="50">50</button>
+                <button class="preset-btn" type="button" data-count="all">全部</button>
+              </div>
+            </div>
+          </div>
+        </section>
 
-/* Rem quote */
-.rem-quote-bar {
-  text-align: center; padding: 10px 20px; margin-top: 8px;
-  font-size: 13px; color: #4a8bc9; font-weight: 600;
-  border-top: 1px dashed #c8daf5; border-bottom: 1px dashed #c8daf5;
-}
+        <section class="status-panel" aria-label="刷题状态">
+          <div class="status-head">
+            <div>
+              <p class="label">当前范围</p>
+              <h2 id="scopeTitle">-</h2>
+            </div>
+            <div class="percent" id="scopePercent">0%</div>
+          </div>
+          <div class="progress-track"><div class="progress-bar" id="scopeProgress"></div></div>
+          <p class="review-plan" id="reviewPlan">本组会优先安排未刷题和到期复习题。</p>
+          <div class="stats">
+            <div><strong id="totalCount">0</strong><span>总题</span></div>
+            <div><strong id="seenCount">0</strong><span>已刷</span></div>
+            <div><strong id="unseenCount">0</strong><span>未刷</span></div>
+            <div><strong id="dueCount">0</strong><span>待复习</span></div>
+            <div><strong id="weakCount">0</strong><span>薄弱</span></div>
+            <div><strong id="hardCount">0</strong><span>错题</span></div>
+            <div><strong id="starredCount">0</strong><span>标星</span></div>
+          </div>
+        </section>
 
+        <nav class="home-actions" aria-label="首页操作">
+          <button class="library-btn" id="openLibraryBtn" type="button">题目库</button>
+          <button class="library-btn wrong-review-btn" id="wrongReviewBtn" type="button">错题冲刺</button>
+          <button class="start-btn" id="startBtn" type="button">开始刷题</button>
+        </nav>
+      </section>
 
-.rem-star:nth-child(2n) { animation-name: floatStar2; animation-duration: 4s; }
-.rem-star:nth-child(3n) { animation-duration: 3.5s; animation-delay: 0.5s; }
-.rem-star:nth-child(5n) { animation-duration: 2.8s; animation-delay: 1s; }
+      <section id="libraryView" class="view hidden">
+        <header class="study-topbar">
+          <button class="icon-btn" id="libraryBackBtn" type="button" aria-label="回到首页" title="回到首页">‹</button>
+          <div>
+            <p class="eyebrow" id="libraryScope">-</p>
+            <h1>题目库</h1>
+          </div>
+          <button class="icon-btn" id="libraryThemeBtn" type="button" aria-label="切换主题" title="切换主题">☾</button>
+        </header>
+        <section class="panel library-panel">
+          <div class="list-tabs" role="tablist" aria-label="题目状态">
+            <button class="tab-btn active" type="button" data-list="due">待复习</button>
+            <button class="tab-btn" type="button" data-list="unseen">未刷</button>
+            <button class="tab-btn" type="button" data-list="seen">已刷</button>
+            <button class="tab-btn" type="button" data-list="weak">薄弱</button>
+            <button class="tab-btn" type="button" data-list="hard">错题集</button>
+            <button class="tab-btn" type="button" data-list="starred">标星</button>
+            <button class="tab-btn" type="button" data-list="skipped">标不想背</button>
+          </div>
+          <div class="question-list library-list" id="statusList"></div>
+        </section>
+      </section>
 
-/* Rem mascot - CSS art in bottom right */
-.rem-mascot {
-  position: fixed; bottom: 16px; right: 16px; z-index: 50;
-  pointer-events: none; user-select: none;
-  display: flex; flex-direction: column; align-items: center;
-}
-.rem-mascot {
-  position: fixed; bottom: 10px; right: 10px; z-index: 50;
-  pointer-events: none; user-select: none;
-  display: flex; flex-direction: column; align-items: center;
-}
+      <section id="detailView" class="view hidden">
+        <header class="study-topbar">
+          <button class="icon-btn" id="detailBackBtn" type="button" aria-label="回到题目库" title="回到题目库">‹</button>
+          <div>
+            <p class="eyebrow" id="detailScope">-</p>
+            <h1 id="detailTitle">题目详情</h1>
+          </div>
+          <button class="icon-btn" id="detailStarBtn" type="button" aria-label="标星" title="标星">☆</button>
+        </header>
+        <section class="study-card detail-card" id="detailCard">
+          <div class="card-meta">
+            <span id="detailMeta">-</span>
+            <span id="detailIndex">0 / 0</span>
+          </div>
+          <article class="question-area">
+            <h2 id="detailQuestionText">-</h2>
+            <div class="media-list" id="detailQuestionMedia"></div>
+            <ul class="options" id="detailOptionList"></ul>
+            <div class="answer-box">
+              <p class="label">答案</p>
+              <p id="detailAnswerText"></p>
+              <div class="media-list" id="detailAnswerMedia"></div>
+            </div>
+            <section class="memory-panel" aria-label="记忆历史">
+              <div class="memory-head">
+                <p class="label">记忆历史</p>
+                <span id="detailNextReviewText">未刷</span>
+              </div>
+              <div class="memory-stats" id="detailMemoryStats"></div>
+              <div class="memory-list" id="detailMemoryList"></div>
+            </section>
+          </article>
+        </section>
+        <nav class="detail-actions" aria-label="详情切题">
+          <button class="library-btn" id="detailPrevBtn" type="button">上一题</button>
+          <button class="start-btn" id="detailNextBtn" type="button">下一题</button>
+        </nav>
+      </section>
 
+      <section id="resultView" class="view hidden">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">本组完成</p>
+            <h1>刷题结果</h1>
+          </div>
+        </header>
 
-/* Rem quote bar at bottom of hero */
-.rem-quote {
-  text-align: center; padding: 12px 20px; margin-top: 8px;
-  font-size: 13px; color: #4a8bc9; font-style: italic;
-  border-top: 1px dashed #d0e2f8; border-bottom: 1px dashed #d0e2f8;
-}
-.rem-quote span { color: #e8878a; }
+        <section class="result-panel" aria-label="本组统计">
+          <div class="result-hero" id="resultHero">
+            <span class="result-percent" id="resultPercent">0%</span>
+            <span class="result-tagline" id="resultTagline">-</span>
+          </div>
+          <div class="result-track"><div class="result-bar" id="resultBar"></div></div>
+          <div class="result-stats" id="resultStats"></div>
+          <p class="result-summary" id="resultSummary"></p>
+        </section>
 
+        <nav class="result-actions">
+          <button class="start-btn" id="retryWrongBtn" type="button">重刷错题</button>
+          <button class="library-btn" id="resultHomeBtn" type="button">返回首页</button>
+        </nav>
+      </section>
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { font-size: 16px; scroll-behavior: smooth; }
-body {
-  font-family: var(--font); background: var(--bg); color: var(--text);
-  min-height: 100vh; line-height: 1.6; transition: background 0.3s, color 0.3s;
-}
-.hidden { display: none !important; }
+      <section id="studyView" class="view hidden">
+        <header class="study-topbar">
+          <button class="icon-btn" id="backHomeBtn" type="button" aria-label="回到首页" title="回到首页">‹</button>
+          <div>
+            <p class="eyebrow" id="studyScope">-</p>
+            <h1 id="studyTitle">刷题</h1>
+          </div>
+          <button class="icon-btn undo-btn" id="undoBtn" type="button" aria-label="撤回上一题" title="撤回上一题" hidden>↶</button>
+          <button class="icon-btn" id="starBtn" type="button" aria-label="标星" title="标星">☆</button>
+          <button class="icon-btn" id="skipBtn" type="button" aria-label="不想背" title="不想背">⊘</button>
+        </header>
 
-/* ====== Navigation ====== */
-.nav {
-  background: var(--card); border-bottom: 1px solid var(--border);
-  padding: 0 20px; height: 56px; display: flex; align-items: center;
-  justify-content: space-between; position: sticky; top: 0; z-index: 100;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.04); transition: background 0.3s;
-}
-.nav-left { display: flex; align-items: center; gap: 12px; }
-.nav-logo { font-size: 20px; }
-.nav-brand { font-size: 16px; font-weight: 700; white-space: nowrap; }
-.nav-right { display: flex; align-items: center; gap: 8px; }
-.nav-btn {
-  background: none; border: 1.5px solid var(--border); border-radius: 8px;
-  padding: 6px 12px; cursor: pointer; font-size: 13px; color: var(--text);
-  transition: var(--transition); white-space: nowrap; font-family: inherit;
-}
-.nav-btn:hover { border-color: var(--info); color: var(--info); }
-.nav-back { cursor: pointer; font-size: 13px; color: var(--info); display: flex; align-items: center; gap: 4px; }
-.nav-stats { display: flex; gap: 14px; font-size: 12px; color: var(--text2); }
-.nav-stats .val { font-weight: 600; color: var(--text); }
+        <section class="study-card" id="studyCard" aria-live="polite">
+          <div class="card-meta">
+            <span id="questionMeta">-</span>
+            <span id="sessionIndex">0 / 0</span>
+          </div>
+          <div class="progress-track"><div class="progress-bar" id="sessionProgress"></div></div>
+          <article class="question-area" id="questionArea">
+            <h2 id="questionText">正在载入题目...</h2>
+            <div class="media-list" id="questionMedia"></div>
+            <ul class="options" id="optionList"></ul>
+            <div class="answer-box" id="answerBox" hidden>
+              <p class="label">答案</p>
+              <p id="answerText"></p>
+              <div class="media-list" id="answerMedia"></div>
+            </div>
+            <p class="result-note" id="resultNote"></p>
+            <details class="memory-panel memory-compact" id="memoryPanel" aria-label="记忆历史">
+              <summary class="memory-summary">
+                <span>记忆记录</span>
+                <strong id="nextReviewText">未刷</strong>
+              </summary>
+              <div class="memory-stats" id="memoryStats"></div>
+              <div class="memory-list" id="memoryList"></div>
+            </details>
+          </article>
+        </section>
 
-/* ====== Layout ====== */
-.container { max-width: 800px; margin: 0 auto; padding: 20px 16px 80px; }
+        <nav class="bottom-actions" id="actionBar" aria-label="答题操作"></nav>
+      </section>
+    </main>
 
-/* ====== Cards ====== */
-.card {
-  background: var(--card); border-radius: var(--radius);
-  box-shadow: var(--shadow); padding: 24px 28px; margin-bottom: 18px;
-  transition: background 0.3s, box-shadow 0.3s;
-}
-
-/* ====== Home - Subject Selection ====== */
-.hero { text-align: center; padding: 28px 16px 16px; }
-.hero h1 {
-  font-size: 26px; font-weight: 800;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; margin-bottom: 6px;
-}
-.hero .sub { color: var(--text2); font-size: 14px; }
-
-.subject-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
-@media (max-width: 500px) { .subject-grid { grid-template-columns: 1fr; } }
-
-.subject-card {
-  background: var(--card); border: 2px solid var(--border); border-radius: var(--radius);
-  padding: 24px 20px; cursor: pointer; transition: var(--transition); position: relative;
-}
-.subject-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
-.subject-card .s-icon { font-size: 40px; margin-bottom: 10px; display: block; }
-.subject-card .s-name { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
-.subject-card .s-count { font-size: 13px; color: var(--text2); }
-.subject-card .s-bar { height: 4px; border-radius: 2px; margin-top: 12px; transition: width 0.5s; }
-.subject-card .s-progress { font-size: 11px; color: var(--text2); margin-top: 4px; }
-
-.ac-plc { border-left: 4px solid #8b5cf6; } .ac-plc .s-bar { background: #8b5cf6; }
-.ac-mcu { border-left: 4px solid #3b82f6; } .ac-mcu .s-bar { background: #3b82f6; }
-.ac-pe  { border-left: 4px solid #f59e0b; } .ac-pe  .s-bar { background: #f59e0b; }
-.ac-auto{ border-left: 4px solid #10b981; } .ac-auto .s-bar { background: #10b981; }
-
-/* ====== Mode Selection ====== */
-.mode-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
-@media (max-width: 500px) { .mode-grid { grid-template-columns: 1fr 1fr; } }
-.mode-card {
-  background: var(--card); border: 2px solid var(--border); border-radius: var(--radius-sm);
-  padding: 18px 12px; text-align: center; cursor: pointer; transition: var(--transition);
-}
-.mode-card:hover { border-color: var(--info); transform: translateY(-2px); }
-.mode-card.sel { border-color: var(--info); background: color-mix(in srgb, var(--info) 8%, var(--card)); }
-.mode-card .m-icon { font-size: 28px; display: block; margin-bottom: 6px; }
-.mode-card .m-label { font-weight: 700; font-size: 14px; }
-.mode-card .m-hint { font-size: 11px; color: var(--text2); }
-
-/* Settings */
-.settings { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
-.settings label { font-weight: 600; font-size: 14px; }
-.settings select, .settings input[type=number] {
-  padding: 8px 12px; border: 2px solid var(--border); border-radius: 8px;
-  font-size: 14px; background: var(--card); color: var(--text); font-family: inherit;
-}
-.settings input[type=number] { width: 80px; text-align: center; }
-.type-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.type-chip {
-  padding: 6px 14px; border: 1.5px solid var(--border); border-radius: 20px;
-  cursor: pointer; font-size: 13px; transition: var(--transition); user-select: none;
-}
-.type-chip.sel { background: var(--info); color: #fff; border-color: var(--info); }
-.type-chip:hover { border-color: var(--info); }
-
-/* ====== Buttons ====== */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-  padding: 12px 28px; border: none; border-radius: 10px; font-size: 15px;
-  font-weight: 600; cursor: pointer; transition: var(--transition); font-family: inherit;
-}
-.btn-primary { background: var(--info); color: #fff; }
-.btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.3); }
-.btn-success { background: var(--success); color: #fff; }
-.btn-danger { background: var(--danger); color: #fff; }
-.btn-outline { background: none; border: 2px solid var(--border); color: var(--text); }
-.btn-lg { padding: 14px 40px; font-size: 17px; border-radius: 12px; }
-.btn-sm { padding: 6px 14px; font-size: 13px; border-radius: 8px; }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-.btn-block { display: block; width: 100%; margin-top: 8px; }
-
-/* ====== Quiz Interface ====== */
-.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
-.quiz-progress { font-size: 14px; font-weight: 600; color: var(--text2); }
-.quiz-timer { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.quiz-timer.warn { color: var(--danger); animation: pulse 1s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
-
-.progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
-.progress-bar-fill { height: 100%; background: var(--info); border-radius: 3px; transition: width 0.4s; }
-
-.question-card { animation: fadeIn 0.3s; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.q-meta { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-.q-badge { padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
-.q-badge.type { background: #ede9fe; color: #7c3aed; }
-.q-badge.diff-easy { background: #d1fae5; color: #059669; }
-.q-badge.diff-mid { background: #fef3c7; color: #d97706; }
-.q-badge.diff-hard { background: #fee2e2; color: #dc2626; }
-[data-theme="dark"] .q-badge.type { background: #3b1f9e; color: #c4b5fd; }
-[data-theme="dark"] .q-badge.diff-easy { background: #064e3b; color: #6ee7b7; }
-[data-theme="dark"] .q-badge.diff-mid { background: #78350f; color: #fcd34d; }
-[data-theme="dark"] .q-badge.diff-hard { background: #7f1d1d; color: #fca5a5; }
-
-.q-stem { font-size: 17px; font-weight: 600; line-height: 1.7; margin-bottom: 20px; word-break: break-word; }
-
-/* Options */
-.option-list { display: flex; flex-direction: column; gap: 10px; }
-.option {
-  display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px;
-  border: 2px solid var(--border); border-radius: var(--radius-sm);
-  cursor: pointer; transition: var(--transition); word-break: break-word;
-}
-.option:hover { border-color: var(--info); background: color-mix(in srgb, var(--info) 5%, var(--card)); }
-.option.selected { border-color: var(--info); background: color-mix(in srgb, var(--info) 10%, var(--card)); }
-.option.correct { border-color: var(--success) !important; background: color-mix(in srgb, var(--success) 12%, var(--card)) !important; }
-.option.wrong { border-color: var(--danger) !important; background: color-mix(in srgb, var(--danger) 12%, var(--card)) !important; }
-.option.reveal-correct { border-color: var(--success) !important; background: color-mix(in srgb, var(--success) 8%, var(--card)) !important; }
-.option.disabled { pointer-events: none; opacity: 0.85; }
-.option-key {
-  width: 32px; height: 32px; border-radius: 8px; background: var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 14px; flex-shrink: 0; transition: var(--transition);
-}
-.option.selected .option-key { background: var(--info); color: #fff; }
-.option.correct .option-key { background: var(--success); color: #fff; }
-.option.wrong .option-key { background: var(--danger); color: #fff; }
-.option-text { flex: 1; padding-top: 4px; font-size: 15px; }
-
-/* True/False */
-.tf-group { display: flex; gap: 12px; }
-.tf-btn {
-  flex: 1; padding: 20px; border: 2px solid var(--border); border-radius: var(--radius-sm);
-  text-align: center; cursor: pointer; font-size: 18px; font-weight: 700; transition: var(--transition);
-}
-.tf-btn:hover { border-color: var(--info); }
-.tf-btn.sel { border-color: var(--info); background: color-mix(in srgb, var(--info) 10%, var(--card)); }
-.tf-btn.correct { border-color: var(--success) !important; background: color-mix(in srgb, var(--success) 15%, var(--card)) !important; color: var(--success) !important; }
-.tf-btn.wrong { border-color: var(--danger) !important; background: color-mix(in srgb, var(--danger) 15%, var(--card)) !important; color: var(--danger) !important; }
-
-/* Fill in blank / Text */
-.fill-input {
-  width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm);
-  font-size: 16px; background: var(--card); color: var(--text); font-family: inherit;
-  transition: var(--transition); resize: vertical;
-}
-.fill-input:focus { border-color: var(--info); outline: none; }
-.fill-input.correct { border-color: var(--success) !important; }
-.fill-input.wrong { border-color: var(--danger) !important; }
-.fill-input:disabled { opacity: 0.85; }
-
-/* Feedback */
-.feedback { margin-top: 16px; padding: 14px 18px; border-radius: var(--radius-sm); font-size: 14px; display: none; }
-.feedback.show { display: block; animation: fadeIn 0.3s; }
-.feedback.correct-fb { background: #d1fae5; color: #065f46; }
-.feedback.wrong-fb { background: #fee2e2; color: #991b1b; }
-[data-theme="dark"] .feedback.correct-fb { background: #064e3b; color: #a7f3d0; }
-[data-theme="dark"] .feedback.wrong-fb { background: #7f1d1d; color: #fecaca; }
-
-.q-actions { display: flex; gap: 10px; margin-top: 16px; justify-content: center; flex-wrap: wrap; }
-
-/* ====== Question Navigator ====== */
-.q-nav { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 18px; }
-.q-nav-dot {
-  width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center;
-  justify-content: center; font-size: 12px; font-weight: 600; cursor: pointer; transition: var(--transition);
-  border: 1.5px solid var(--border); color: var(--text2);
-}
-.q-nav-dot:hover { transform: scale(1.1); }
-.q-nav-dot.current { background: var(--info); color: #fff; border-color: var(--info); }
-.q-nav-dot.done-right { background: var(--success); color: #fff; border-color: var(--success); }
-.q-nav-dot.done-wrong { background: var(--danger); color: #fff; border-color: var(--danger); }
-
-/* ====== Results ====== */
-.result-hero { text-align: center; padding: 30px 20px; }
-.result-score {
-  font-size: 64px; font-weight: 800;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.result-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
-@media (max-width: 500px) { .result-stats { grid-template-columns: 1fr 1fr; } }
-.stat-item { text-align: center; padding: 14px 8px; }
-.stat-num { font-size: 24px; font-weight: 700; }
-.stat-label { font-size: 12px; color: var(--text2); }
-.stat-item.correct .stat-num { color: var(--success); }
-.stat-item.wrong .stat-num { color: var(--danger); }
-
-/* ====== Wrong Questions ====== */
-.wrong-list { display: flex; flex-direction: column; gap: 10px; }
-.wrong-item {
-  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm);
-  padding: 16px 18px; transition: var(--transition);
-}
-.wrong-item .w-stem { font-size: 14px; margin-bottom: 6px; font-weight: 600; }
-.wrong-item .w-answer { font-size: 13px; color: var(--success); }
-.wrong-item .w-my { font-size: 13px; color: var(--danger); }
-
-/* ====== Toast ====== */
-.toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #1e293b; color: #fff; padding: 10px 24px; border-radius: 20px;
-  font-size: 14px; z-index: 999; animation: toastIn 0.3s, toastOut 0.3s 1.7s forwards;
-  pointer-events: none;
-}
-@keyframes toastIn { from { opacity:0; transform:translateX(-50%) translateY(10px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
-@keyframes toastOut { from { opacity:1; } to { opacity:0; } }
-
-/* ====== Keyboard hint ====== */
-.kbd-hint {
-  display: inline-block; background: var(--border); padding: 2px 8px; border-radius: 4px;
-  font-size: 11px; font-family: monospace; margin: 0 2px;
-}
-
-/* ====== Responsive ====== */
-@media (max-width: 600px) {
-  .container { padding: 14px 10px 60px; }
-  .card { padding: 18px 14px; }
-  .q-stem { font-size: 15px; }
-  .option { padding: 12px 10px; }
-  .option-text { font-size: 14px; }
-  .nav { padding: 0 10px; }
-  .nav-stats { display: none; }
-  .hero h1 { font-size: 22px; }
-  .nav-brand { font-size: 14px; }
-}
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-::-webkit-scrollbar-track { background: transparent; }
-</style>
-</head>
-<body>
-
-<nav class="nav">
-  <div class="nav-left">
-    <span class="nav-logo">📚</span>
-    <span class="nav-brand" id="navTitle">期末刷题平台</span>
-    <span class="nav-back hidden" id="navBack" onclick="goHome()">← 返回</span>
-  </div>
-  <div class="nav-stats" id="navStats">
-    <span>📊 刷题 <span class="val" id="navTotal">0</span></span>
-    <span>✅ 正确率 <span class="val" id="navRate">-</span></span>
-  </div>
-  <div class="nav-right">
-    <button class="nav-btn" id="btnTheme" onclick="toggleTheme()" title="切换主题">☀️</button>
-    <button class="nav-btn" onclick="showStats()" id="btnStats">📊</button>
-    <button class="nav-btn" onclick="showWrongBook()" id="btnWrongBook">📝</button>
-  </div>
-</nav>
-
-<div class="container" id="mainContainer"></div>
-<div id="toastContainer"></div>
-
-<script>
-// ====== SUBJECT REGISTRY ======
-const SUBJECTS = {
-  plc: {
-    id: 'plc', name: 'PLC运动控制及工业网络技术', icon: '🔌', cls: 'ac-plc',
-    color: '#8b5cf6', file: 'data_plc.js', dataVar: 'QUESTION_DATA_PLC',
-    // How to map types: our standard name -> [data key, label]
-    typeMap: {
-      danxuan: { key: 'danxuan', label: '单选题', icon: '📋' },
-      panduan: { key: 'panduan', label: '判断题', icon: '✅' },
-      tiankong: { key: 'tiankong', label: '填空题', icon: '✏️' }
-    },
-    // How to normalize a single question
-    normalize(q, type) {
-      const base = { _type: type, id: q.id, stem: q.stem, difficulty: q.difficulty || '一般', topic: q.topic || '' };
-      if (type === 'danxuan') { base.answer = q.answer; base.options = { A: q.A, B: q.B, C: q.C, D: q.D }; base.multiSelect = false; }
-      else if (type === 'duoxuan') { base.answer = q.answer; base.options = { A: q.A, B: q.B, C: q.C, D: q.D, E: q.E }; base.multiSelect = true; }
-      else if (type === 'panduan') { base.answer = q.answer; }
-      else if (type === 'tiankong') { base.answer = (q.answers || []).join('；'); base.answers = q.answers || []; base.blankCount = q.blankCount || 1; }
-      else { base.answer = q.answer || (q.answers || []).join('；'); }
-      return base;
-    }
-  },
-  mcu: {
-    id: 'mcu', name: '单片机原理与应用', icon: '💻', cls: 'ac-mcu',
-    color: '#3b82f6', file: 'data_mcu.js', dataVar: 'QUESTION_DATA_MCU',
-    typeMap: {
-      danxuan: { key: 'danxuan', label: '单选题', icon: '📋' },
-      duoxuan: { key: 'duoxuan', label: '多选题', icon: '☑️' },
-      panduan: { key: 'panduan', label: '判断题', icon: '✅' },
-      tiankong: { key: 'tiankong', label: '填空题', icon: '✏️' },
-      mingci:  { key: 'mingci', label: '名词解释', icon: '📖' },
-      jianda:  { key: 'jianda', label: '简答题', icon: '💬' },
-      zonghe:  { key: 'zonghe', label: '综合题', icon: '🔧' }
-    },
-    normalize(q, type) {
-      const base = { _type: type, id: q.id, stem: q.stem, difficulty: q.difficulty || '一般', topic: q.topic || '' };
-      if (type === 'danxuan') { base.answer = q.answer; base.options = { A: q.A, B: q.B, C: q.C, D: q.D }; base.multiSelect = false; }
-      else if (type === 'duoxuan') { base.answer = q.answer; base.options = { A: q.A, B: q.B, C: q.C, D: q.D, E: q.E }; base.multiSelect = true; }
-      else if (type === 'panduan') { base.answer = q.answer; }
-      else if (type === 'tiankong') { base.answer = (q.answers || []).join('；'); base.answers = q.answers || []; base.blankCount = q.blankCount || 1; }
-      else if (type === 'mingci') { base.answer = (q.answers || []).join('；'); }
-      else if (type === 'jianda') { base.answer = q.answer || ''; }
-      else if (type === 'zonghe') { base.answer = q.answer || ''; }
-      else { base.answer = q.answer || ''; }
-      return base;
-    }
-  },
-  pe: {
-    id: 'pe', name: '电力电子技术', icon: '⚡', cls: 'ac-pe',
-    color: '#f59e0b', file: 'data_pe.js', dataVar: 'QUESTION_DATA_PE',
-    typeMap: {
-      danxuan: { key: 'multipleChoice', label: '单选题', icon: '📋' },
-      panduan: { key: 'trueFalse', label: '判断题', icon: '✅' },
-      tiankong: { key: 'fillBlank', label: '填空题', icon: '✏️' }
-    },
-    normalize(q, type) {
-      const stem = q.question || q.stem || '';
-      const base = { _type: type, id: q.id, stem: stem, difficulty: q.difficulty || '一般', topic: q.topic || '' };
-      if (type === 'danxuan') {
-        base.answer = q.answer;
-        if (q.options) { base.options = q.options; }
-        else { base.options = { A: q.A, B: q.B, C: q.C, D: q.D }; }
-        base.multiSelect = false;
-      } else if (type === 'panduan') {
-        base.answer = q.answer === true ? '对' : (q.answer === false ? '错' : q.answer);
-      } else if (type === 'tiankong') {
-        const ans = Array.isArray(q.answer) ? q.answer : [q.answer || ''];
-        base.answer = ans.join('；');
-        base.answers = ans;
-        base.blankCount = ans.length;
-      }
-      return base;
-    }
-  },
-  auto: {
-    id: 'auto', name: '自动控制原理与系统', icon: '🎯', cls: 'ac-auto',
-    color: '#10b981', file: 'data_auto.js', dataVar: 'QUESTION_DATA_AUTO',
-    typeMap: {
-      panduan: { key: 'panduan', label: '判断题', icon: '✅' },
-      danxuan: { key: 'danxuan', label: '单选题', icon: '📋' },
-      tiankong: { key: 'tiankong', label: '填空题', icon: '✏️' },
-      matlab:  { key: 'matlab', label: 'MATLAB题', icon: '💻' }
-    },
-    normalize(q, type) {
-      const base = { _type: type, id: q.id, stem: q.stem, difficulty: q.difficulty || '一般', topic: q.topic || '' };
-      if (type === 'danxuan') { base.answer = q.answer; base.options = { A: q.A, B: q.B, C: q.C, D: q.D }; base.multiSelect = false; }
-      else if (type === 'panduan') { base.answer = q.answer; }
-      else if (type === 'tiankong') { base.answer = (q.answers || []).join('；'); base.answers = q.answers || []; base.blankCount = q.blankCount || 1; }
-      else if (type === 'matlab') { base.answer = q.answer || ''; }
-      return base;
-    }
-  }
-};
-
-// ====== APP STATE ======
-let app = {
-  currentSubject: null,
-  currentMode: 'sequential', // sequential | random | exam | wrong
-  currentTypes: [],
-  questionCount: 20,
-  questions: [],           // normalized question objects
-  currentIndex: 0,
-  answers: [],             // { userAnswer, isCorrect }
-  score: { correct: 0, wrong: 0, total: 0 },
-  showAnswer: false,
-  examTimer: null,
-  examTimeLeft: 0,
-  examTotalTime: 1800,     // 30 min default
-  dataLoaded: {},
-  rawData: {},
-};
-
-// ====== LOCAL STORAGE ======
-function loadStorage() {
-  try { return JSON.parse(localStorage.getItem('quiz_platform') || '{}'); } catch(e) { return {}; }
-}
-function saveStorage(data) {
-  try { const e = loadStorage(); Object.assign(e, data); localStorage.setItem('quiz_platform', JSON.stringify(e)); } catch(e) {}
-}
-
-// ====== RENDERING HELPERS ======
-const container = document.getElementById('mainContainer');
-function render(html) { container.innerHTML = html; }
-
-// ====== HOME PAGE ======
-function goHome() {
-  app.currentSubject = null; app.questions = []; app.currentIndex = 0;
-  app.answers = []; app.showAnswer = false;
-  if (app.examTimer) { clearInterval(app.examTimer); app.examTimer = null; }
-  document.getElementById('navTitle').textContent = '期末刷题平台';
-  document.getElementById('navBack').classList.add('hidden');
-  document.getElementById('btnStats').classList.remove('hidden');
-  document.getElementById('btnWrongBook').classList.remove('hidden');
-  updateNavStats();
-  renderHome();
-}
-
-function renderHome() {
-  let html = `<div class="hero"><h1>📚 期末冲刺刷题</h1><p class="sub">PLC · 单片机 · 电力电子 · 自动控制 &nbsp;|&nbsp; 共 1234 题</p>
-    <div class="rem-quote-bar" id="remQuoteBar" style="display:none">
-      💙 蕾姆陪你一起冲刺期末，绝不放弃！💙
+    <script src="./questions.js?v=20260626-plc-fill-pdf-restore"></script>
+    <script src="./app.js?v=20260625-wrongbook"></script>
+  
+    <!-- Rem Mascot -->
+    <div id="remMascot" style="display:none;position:fixed;bottom:8px;right:8px;z-index:99;flex-direction:column;align-items:center;pointer-events:none">
+      <div id="remSpeech" style="background:#fff;color:#4a8bc9;padding:6px 12px;border-radius:14px 14px 3px 14px;font-size:12px;font-weight:700;margin-bottom:4px;box-shadow:0 2px 10px rgba(74,125,181,0.15);white-space:nowrap;animation:remBounce 2.5s ease-in-out infinite;border:1px solid #dce8f5;pointer-events:auto;cursor:pointer" onclick="remEncourage()">加油！你可以的！</div>
+      <div style="width:100px;cursor:pointer;pointer-events:auto;transition:transform 0.3s" onclick="remEncourage()"><img src="rem.jpg" alt="蕾姆" id="remImg" style="width:100px;border-radius:14px;box-shadow:0 3px 16px rgba(74,125,181,0.22);border:2px solid rgba(255,255,255,0.8);transition:opacity 0.3s"></div>
     </div>
-    </div>`;
-  html += `<div class="subject-grid">`;
-
-  for (const [key, subj] of Object.entries(SUBJECTS)) {
-    const storage = loadStorage();
-    const prog = storage[key] || {};
-    // Get cached total if data not loaded
-    let total = 0;
-    if (app.rawData[key]) {
-      const data = app.rawData[key];
-      for (const [tk, tm] of Object.entries(subj.typeMap)) {
-        const arr = data[tm.key];
-        if (Array.isArray(arr)) total += arr.length;
-      }
-    }
-    const done = prog.completed || 0;
-    const pct = total > 0 ? Math.round(done / Math.min(total, 200) * 100) : 0;
-    html += `<div class="subject-card ${subj.cls}" onclick="selectSubject('${key}')">
-      <span class="s-icon">${subj.icon}</span>
-      <div class="s-name">${subj.name}</div>
-      <div class="s-count">${Object.values(subj.typeMap).map(t => t.label).join(' · ')} &nbsp;|&nbsp; ${total || '?'} 题</div>
-      <div class="s-bar" style="width:${Math.min(pct, 100)}%"></div>
-      <div class="s-progress">${pct > 0 ? '已完成 ' + pct + '%' : '点击开始刷题'}</div>
-    </div>`;
-  }
-  html += `</div>`;
-
-  // Quick global stats
-  const allStorage = loadStorage();
-  let allDone = 0, allRight = 0, allTotal = 0;
-  for (const [k] of Object.entries(SUBJECTS)) {
-    const p = allStorage[k] || {};
-    allDone += p.completed || 0;
-    allRight += p.correct || 0;
-    allTotal += p.total || 0;
-  }
-  html += `<div class="card" style="margin-top:16px;text-align:center;padding:20px 28px">
-    <div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:12px">
-      <div><div style="font-size:28px;font-weight:700;color:var(--info)">${allDone}</div><div style="font-size:12px;color:var(--text2)">累计刷题</div></div>
-      <div><div style="font-size:28px;font-weight:700;color:var(--success)">${allRight}</div><div style="font-size:12px;color:var(--text2)">累计正确</div></div>
-      <div><div style="font-size:28px;font-weight:700;color:var(--warning)">${allTotal > 0 ? Math.round(allRight/allTotal*100) : 0}%</div><div style="font-size:12px;color:var(--text2)">总正确率</div></div>
-    </div>
-  </div>`;
-
-  render(html);
-}
-
-// ====== LOAD SUBJECT DATA ======
-async function loadSubjectData(subjectId) {
-  if (app.rawData[subjectId]) return app.rawData[subjectId];
-
-  const subj = SUBJECTS[subjectId];
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = subj.file;
-    script.onload = () => {
-      const data = window[subj.dataVar];
-      if (data) {
-        app.rawData[subjectId] = data;
-        resolve(data);
-      } else {
-        reject(new Error('Variable not found: ' + subj.dataVar));
-      }
-    };
-    script.onerror = () => reject(new Error('File not found: ' + subj.file));
-    document.head.appendChild(script);
-  });
-}
-
-// ====== SUBJECT → MODE SELECTION ======
-async function selectSubject(subjectId) {
-  try {
-    render(`<div class="card" style="text-align:center;padding:40px"><p>⏳ 加载题库中...</p></div>`);
-    const data = await loadSubjectData(subjectId);
-    app.currentSubject = subjectId;
-    const subj = SUBJECTS[subjectId];
-
-    // Calculate total questions
-    let totalQ = 0;
-    const availableTypes = [];
-    for (const [typeName, tm] of Object.entries(subj.typeMap)) {
-      const arr = data[tm.key];
-      if (Array.isArray(arr) && arr.length > 0) {
-        availableTypes.push(typeName);
-        totalQ += arr.length;
-      }
-    }
-
-    // Set default types if none
-    if (app.currentTypes.length === 0) app.currentTypes = [availableTypes[0]];
-
-    document.getElementById('navTitle').textContent = subj.icon + ' ' + subj.name;
-    document.getElementById('navBack').classList.remove('hidden');
-    document.getElementById('btnStats').classList.add('hidden');
-    document.getElementById('btnWrongBook').classList.add('hidden');
-    updateNavStats();
-
-    renderModeSelection(data, subj, availableTypes, totalQ);
-  } catch(e) {
-    render(`<div class="card" style="text-align:center;padding:40px;color:var(--danger)">
-      <p>❌ 加载失败: ${e.message}</p>
-      <button class="btn btn-outline btn-sm" onclick="goHome()">返回</button>
-    </div>`);
-  }
-}
-
-function renderModeSelection(data, subj, availableTypes, totalQ) {
-  let html = `<div class="card">
-    <div style="text-align:center;margin-bottom:16px">
-      <div style="font-size:48px">${subj.icon}</div>
-      <div style="font-size:20px;font-weight:700">${subj.name}</div>
-      <div style="color:var(--text2);font-size:14px">共 ${totalQ} 题</div>
-    </div>
-
-    <div style="font-weight:600;margin-bottom:8px">🎯 刷题模式</div>
-    <div class="mode-grid">
-      <div class="mode-card ${app.currentMode==='sequential'?'sel':''}" onclick="setMode('sequential')">
-        <span class="m-icon">📖</span><span class="m-label">顺序刷题</span>
-        <span class="m-hint">按题库顺序逐题作答</span>
-      </div>
-      <div class="mode-card ${app.currentMode==='random'?'sel':''}" onclick="setMode('random')">
-        <span class="m-icon">🎲</span><span class="m-label">随机刷题</span>
-        <span class="m-hint">随机打乱题目顺序</span>
-      </div>
-      <div class="mode-card ${app.currentMode==='exam'?'sel':''}" onclick="setMode('exam')">
-        <span class="m-icon">🏆</span><span class="m-label">模拟考试</span>
-        <span class="m-hint">限时答题自动评分</span>
-      </div>
-      <div class="mode-card ${app.currentMode==='wrong'?'sel':''}" onclick="setMode('wrong')">
-        <span class="m-icon">🔄</span><span class="m-label">错题重刷</span>
-        <span class="m-hint">专攻薄弱知识点</span>
-      </div>
-    </div>
-
-    <div style="font-weight:600;margin-top:18px;margin-bottom:8px">📂 题目类型</div>
-    <div class="type-filters">`;
-
-  for (const tn of availableTypes) {
-    const tm = subj.typeMap[tn];
-    const arr = data[tm.key];
-    const sel = app.currentTypes.includes(tn);
-    html += `<span class="type-chip ${sel?'sel':''}" onclick="toggleType('${tn}')">${tm.icon} ${tm.label} (${arr.length})</span>`;
-  }
-
-  html += `</div>
-    <div class="settings">
-      <label>题目数量</label>
-      <input type="number" id="qCount" value="${app.questionCount}" min="5" max="999" onchange="app.questionCount=Math.max(5,parseInt(this.value)||20)">
-      ${app.currentMode === 'exam' ? `<label>考试时间(分钟)</label><input type="number" id="examTime" value="${Math.ceil(app.examTotalTime/60)}" min="5" max="180" onchange="app.examTotalTime=Math.max(300,parseInt(this.value)*60)">` : ''}
-    </div>
-    <div style="color:var(--text2);font-size:12px;margin-top:4px">
-      💡 提示：可使用键盘 <span class="kbd-hint">1-4</span>/<span class="kbd-hint">A-D</span> 选择选项，<span class="kbd-hint">Enter</span> 提交，<span class="kbd-hint">← →</span> 切换题目
-    </div>
-
-    <div style="text-align:center;margin-top:20px">
-      <button class="btn btn-primary btn-lg" onclick="startQuiz()">🚀 开始刷题</button>
-    </div>
-  </div>`;
-
-  render(html);
-}
-
-function setMode(mode) {
-  app.currentMode = mode;
-  const subj = SUBJECTS[app.currentSubject];
-  const data = app.rawData[app.currentSubject];
-  const availableTypes = Object.keys(subj.typeMap).filter(tn => {
-    const tm = subj.typeMap[tn];
-    return Array.isArray(data[tm.key]) && data[tm.key].length > 0;
-  });
-  let totalQ = 0;
-  availableTypes.forEach(tn => { totalQ += data[subj.typeMap[tn].key].length; });
-  renderModeSelection(data, subj, availableTypes, totalQ);
-}
-
-function toggleType(type) {
-  if (app.currentTypes.includes(type)) {
-    if (app.currentTypes.length > 1) app.currentTypes = app.currentTypes.filter(t => t !== type);
-  } else {
-    app.currentTypes.push(type);
-  }
-  const subj = SUBJECTS[app.currentSubject];
-  const data = app.rawData[app.currentSubject];
-  const availableTypes = Object.keys(subj.typeMap).filter(tn => {
-    const tm = subj.typeMap[tn];
-    return Array.isArray(data[tm.key]) && data[tm.key].length > 0;
-  });
-  let totalQ = 0;
-  availableTypes.forEach(tn => { totalQ += data[subj.typeMap[tn].key].length; });
-  renderModeSelection(data, subj, availableTypes, totalQ);
-}
-
-// ====== START QUIZ ======
-function startQuiz() {
-  const data = app.rawData[app.currentSubject];
-  const subj = SUBJECTS[app.currentSubject];
-
-  // Build question pool from selected types
-  let pool = [];
-  for (const tn of app.currentTypes) {
-    const tm = subj.typeMap[tn];
-    const arr = data[tm.key];
-    if (Array.isArray(arr)) {
-      for (const q of arr) {
-        pool.push(subj.normalize(q, tn));
-      }
-    }
-  }
-
-  if (pool.length === 0) { showToast('请至少选择一种题目类型'); return; }
-
-  // Mode: wrong questions
-  if (app.currentMode === 'wrong') {
-    const storage = loadStorage();
-    const wrongIds = storage[app.currentSubject]?.wrongIds || [];
-    if (wrongIds.length === 0) { showToast('错题本为空，先去刷题吧！✨'); return; }
-    pool = pool.filter(q => wrongIds.includes(q.id));
-    if (pool.length === 0) { showToast('所选类型中没有错题记录'); return; }
-  }
-
-  // Shuffle
-  if (app.currentMode === 'random' || app.currentMode === 'exam' || app.currentMode === 'wrong') {
-    pool = shuffle([...pool]);
-  }
-
-  const count = Math.min(app.questionCount, pool.length);
-  app.questions = pool.slice(0, count);
-  app.currentIndex = 0;
-  app.answers = new Array(count).fill(null);
-  app.score = { correct: 0, wrong: 0, total: count };
-  app.showAnswer = false;
-
-  document.getElementById('btnStats').classList.add('hidden');
-  document.getElementById('btnWrongBook').classList.add('hidden');
-
-  // Exam timer
-  if (app.currentMode === 'exam') {
-    app.examTimeLeft = app.examTotalTime;
-    startExamTimer();
-  }
-
-  renderQuestion();
-}
-
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-// ====== RENDER QUESTION ======
-function renderQuestion() {
-  if (app.currentIndex >= app.questions.length) { finishQuiz(); return; }
-
-  const q = app.questions[app.currentIndex];
-  const subj = SUBJECTS[app.currentSubject];
-  const typeInfo = subj.typeMap[q._type];
-  const typeLabel = typeInfo ? typeInfo.label : q._type;
-  const progress = Math.round((app.currentIndex + 1) / app.questions.length * 100);
-
-  let html = `
-    <div class="quiz-header">
-      <span class="quiz-progress">第 <strong>${app.currentIndex + 1}</strong> / ${app.questions.length} 题</span>
-      <span style="font-size:13px;color:var(--text2)">${subj.icon} ${subj.name}</span>
-      ${app.currentMode === 'exam' ? `<span class="quiz-timer" id="quizTimer">${formatTime(app.examTimeLeft)}</span>` : ''}
-    </div>
-    <div class="progress-bar"><div class="progress-bar-fill" style="width:${progress}%"></div></div>
-    <div class="card question-card">
-      <div class="q-meta">
-        <span class="q-badge type">${typeLabel}</span>
-        ${q.topic ? `<span class="q-badge diff-mid">${q.topic}</span>` : ''}
-        ${q.difficulty ? `<span class="q-badge ${q.difficulty==='容易'?'diff-easy':q.difficulty==='困难'?'diff-hard':'diff-mid'}">${q.difficulty}</span>` : ''}
-      </div>
-      <div class="q-stem">${q.stem}</div>`;
-
-  // Render answer area based on type
-  let needsSubmitBtn = false;
-  if (q._type === 'danxuan') {
-    html += renderSingleChoice(q);
-  } else if (q._type === 'duoxuan') {
-    html += renderMultiChoice(q);
-  } else if (q._type === 'panduan') {
-    html += renderTrueFalse(q);
-  } else if (q._type === 'tiankong') {
-    html += renderFillBlank(q);
-    needsSubmitBtn = true;
-  } else {
-    html += renderTextAnswer(q);
-    needsSubmitBtn = true;
-  }
-
-  // Feedback
-  if (app.showAnswer) {
-    const ans = app.answers[app.currentIndex];
-    const isCorrect = ans?.isCorrect;
-    html += `<div class="feedback ${isCorrect ? 'correct-fb' : 'wrong-fb'} show">
-      ${isCorrect ? '✅ 回答正确！太棒了！' : '❌ 回答错误'}
-      <div style="margin-top:6px;font-weight:600">📝 正确答案：${formatCorrectAnswer(q)}</div>
-    </div>`;
-  }
-
-  // Action buttons
-  html += `<div class="q-actions">`;
-  if (!app.showAnswer) {
-    html += `<button class="btn btn-primary" id="btnSubmit" onclick="submitAnswer()" style="display:${needsSubmitBtn ? 'inline-flex' : 'none'}">✅ 提交答案 <span class="kbd-hint">Enter</span></button>`;
-  } else {
-    if (app.currentIndex < app.questions.length - 1) {
-      html += `<button class="btn btn-primary" onclick="nextQuestion()">下一题 → <span class="kbd-hint">→</span></button>`;
-    } else {
-      html += `<button class="btn btn-success" onclick="finishQuiz()">🏁 查看结果</button>`;
-    }
-  }
-  html += `</div></div>`;
-
-
-  render(html);
-
-  // Auto-focus
-  setTimeout(() => {
-    const input = document.getElementById('fillInput');
-    if (input) input.focus();
-  }, 100);
-}
-
-function renderSingleChoice(q) {
-  const keys = Object.keys(q.options || {}).filter(k => q.options[k] !== undefined);
-  let html = '<div class="option-list">';
-  for (const k of keys) {
-    let cls = 'option';
-    if (app.showAnswer) {
-      cls += ' disabled';
-      if (k === q.answer) cls += ' correct';
-      else if (app.answers[app.currentIndex]?.userAnswer === k && k !== q.answer) cls += ' wrong';
-    } else if (app.answers[app.currentIndex]?.userAnswer === k) {
-      cls += ' selected';
-    }
-    html += `<div class="${cls}" onclick="${app.showAnswer ? '' : `selectOption('${k}')`}" id="opt-${k}">
-      <span class="option-key">${k}</span>
-      <span class="option-text">${q.options[k] || ''}</span>
-    </div>`;
-  }
-  html += '</div>';
-  return html;
-}
-
-function renderMultiChoice(q) {
-  const keys = Object.keys(q.options || {}).filter(k => q.options[k] !== undefined);
-  let html = '<div class="option-list"><div style="font-size:13px;color:var(--text2);margin-bottom:4px">多选题 - 点击选项选中/取消</div>';
-  const selected = (app.answers[app.currentIndex]?.userAnswer || '').split('');
-  for (const k of keys) {
-    let cls = 'option';
-    if (app.showAnswer) {
-      cls += ' disabled';
-      if (q.answer.includes(k)) cls += ' correct';
-      else if (selected.includes(k) && !q.answer.includes(k)) cls += ' wrong';
-    } else if (selected.includes(k)) {
-      cls += ' selected';
-    }
-    html += `<div class="${cls}" onclick="${app.showAnswer ? '' : `toggleMultiOption('${k}')`}" id="opt-${k}">
-      <span class="option-key">${k}</span>
-      <span class="option-text">${q.options[k] || ''}</span>
-    </div>`;
-  }
-  html += '</div>';
-  return html;
-}
-
-function renderTrueFalse(q) {
-  const userAns = app.answers[app.currentIndex]?.userAnswer;
-  let html = '<div class="tf-group">';
-  for (const opt of ['对', '错']) {
-    let cls = 'tf-btn';
-    if (app.showAnswer) {
-      if (opt === q.answer) cls += ' correct';
-      else if (userAns === opt && opt !== q.answer) cls += ' wrong';
-    } else if (userAns === opt) {
-      cls += ' sel';
-    }
-    html += `<div class="${cls}" onclick="${app.showAnswer ? '' : `selectTF('${opt}')`}" id="tf-${opt}">
-      ${opt === '对' ? '✅' : '❌'}<br>${opt}
-    </div>`;
-  }
-  html += '</div>';
-  return html;
-}
-
-function renderFillBlank(q) {
-  const userAns = app.answers[app.currentIndex]?.userAnswer || '';
-  let cls = 'fill-input';
-  if (app.showAnswer) {
-    cls += app.answers[app.currentIndex]?.isCorrect ? ' correct' : ' wrong';
-  }
-  return `<input type="text" class="${cls}" id="fillInput"
-    placeholder="${q.blankCount > 1 ? '多个答案请用分号(;)分隔' : '请输入答案'}"
-    value="${escapeHtml(userAns)}"
-    ${app.showAnswer ? 'disabled' : ''}
-    onkeydown="if(event.key==='Enter')submitAnswer()">`;
-}
-
-function renderTextAnswer(q) {
-  const userAns = app.answers[app.currentIndex]?.userAnswer || '';
-  return `<textarea class="fill-input" id="fillInput" rows="5"
-    placeholder="请输入答案..."
-    ${app.showAnswer ? 'disabled' : ''}
-    onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();submitAnswer()}">${escapeHtml(userAns)}</textarea>`;
-}
-
-// ====== ANSWER HANDLING ======
-function selectOption(key) {
-  if (app.showAnswer) return;
-  app.answers[app.currentIndex] = { userAnswer: key };
-  setTimeout(() => submitAnswer(), 150);
-}
-
-function toggleMultiOption(key) {
-  if (app.showAnswer) return;
-  let current = app.answers[app.currentIndex]?.userAnswer || '';
-  if (current.includes(key)) {
-    current = current.replace(key, '');
-  } else {
-    current = (current + key).split('').sort().join('');
-  }
-  app.answers[app.currentIndex] = { userAnswer: current };
-  renderQuestion();
-}
-
-function selectTF(val) {
-  if (app.showAnswer) return;
-  app.answers[app.currentIndex] = { userAnswer: val };
-  setTimeout(() => submitAnswer(), 150);
-}
-
-function submitAnswer() {
-  if (app.showAnswer) return;
-  const q = app.questions[app.currentIndex];
-  let userAnswer = app.answers[app.currentIndex]?.userAnswer;
-
-  // For text input types, get value from input
-  const textTypes = ['tiankong', 'jianda', 'mingci', 'zonghe', 'matlab'];
-  if (textTypes.includes(q._type)) {
-    const input = document.getElementById('fillInput');
-    if (input) userAnswer = input.value.trim();
-  }
-
-  if (!userAnswer) { showToast('请先选择或输入答案'); return; }
-
-  app.answers[app.currentIndex] = { ...app.answers[app.currentIndex], userAnswer };
-
-  // Check correctness
-  let isCorrect = false;
-  if (q._type === 'danxuan') {
-    isCorrect = userAnswer === q.answer;
-  } else if (q._type === 'duoxuan') {
-    // Sort both for comparison
-    isCorrect = userAnswer.split('').sort().join('') === q.answer.split('').sort().join('');
-  } else if (q._type === 'panduan') {
-    isCorrect = userAnswer === q.answer;
-  } else if (q._type === 'tiankong') {
-    const correctAnswers = (q.answers || []).map(a => a.trim().replace(/\s+/g, '').toLowerCase());
-    const userAnswers = userAnswer.split(/[;；]/).map(s => s.trim().replace(/\s+/g, '').toLowerCase()).filter(Boolean);
-    if (correctAnswers.length === 0) {
-      isCorrect = userAnswer.toLowerCase() === (q.answer || '').toLowerCase();
-    } else if (correctAnswers.length === userAnswers.length && correctAnswers.length === 1) {
-      isCorrect = correctAnswers[0] === userAnswers[0] || userAnswers[0].includes(correctAnswers[0]) || correctAnswers[0].includes(userAnswers[0]);
-    } else {
-      isCorrect = correctAnswers.every((ca, i) => userAnswers[i] === ca);
-      if (!isCorrect) {
-        // Try all user answers against all correct answers
-        isCorrect = correctAnswers.every(ca => userAnswers.some(ua => ua.includes(ca) || ca.includes(ua)));
-      }
-    }
-  } else {
-    // Subjective - mark as correct (user reviews themselves)
-    isCorrect = true;
-  }
-
-  app.answers[app.currentIndex].isCorrect = isCorrect;
-  if (isCorrect) app.score.correct++; else app.score.wrong++;
-  app.showAnswer = true;
-
-  // Save progress
-  saveProgress(q.id, isCorrect);
-  renderQuestion();
-
-  // Auto-advance on correct answer (0.7s)
-  if (isCorrect && app.currentIndex < app.questions.length - 1) {
-    const skipTypes = ['tiankong', 'jianda', 'mingci', 'zonghe', 'matlab'];
-    if (!skipTypes.includes(q._type)) {
-      setTimeout(() => {
-        if (app.showAnswer && app.answers[app.currentIndex]?.isCorrect) {
-          app.showAnswer = false;
-          app.currentIndex++;
-          renderQuestion();
-        }
-      }, 700);
-    }
-  }
-}
-
-function nextQuestion() {
-  app.showAnswer = false;
-  app.currentIndex++;
-  renderQuestion();
-}
-
-function jumpTo(index) {
-  app.showAnswer = false;
-  app.currentIndex = index;
-  renderQuestion();
-}
-
-// ====== PROGRESS PERSISTENCE ======
-function saveProgress(questionId, isCorrect) {
-  const storage = loadStorage();
-  const sid = app.currentSubject;
-  if (!storage[sid]) storage[sid] = { completed: 0, correct: 0, total: 0, wrongIds: [] };
-  storage[sid].completed = (storage[sid].completed || 0) + 1;
-  storage[sid].total = (storage[sid].total || 0) + 1;
-  if (isCorrect) {
-    storage[sid].correct = (storage[sid].correct || 0) + 1;
-    storage[sid].wrongIds = (storage[sid].wrongIds || []).filter(id => id !== questionId);
-  } else {
-    if (!storage[sid].wrongIds) storage[sid].wrongIds = [];
-    if (!storage[sid].wrongIds.includes(questionId)) storage[sid].wrongIds.push(questionId);
-  }
-  saveStorage(storage);
-  updateNavStats();
-}
-
-// ====== EXAM TIMER ======
-function startExamTimer() {
-  if (app.examTimer) clearInterval(app.examTimer);
-  app.examTimer = setInterval(() => {
-    app.examTimeLeft--;
-    const el = document.getElementById('quizTimer');
-    if (el) {
-      el.textContent = formatTime(app.examTimeLeft);
-      if (app.examTimeLeft < 300) el.classList.add('warn');
-    }
-    if (app.examTimeLeft <= 0) {
-      clearInterval(app.examTimer);
-      app.examTimer = null;
-      showToast('⏰ 考试时间到！');
-      finishQuiz();
-    }
-  }, 1000);
-}
-
-function formatTime(seconds) {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-}
-
-// ====== FINISH QUIZ ======
-function finishQuiz() {
-  if (app.examTimer) { clearInterval(app.examTimer); app.examTimer = null; }
-
-  const total = app.score.correct + app.score.wrong;
-  const pct = total > 0 ? Math.round(app.score.correct / total * 100) : 0;
-  const subj = SUBJECTS[app.currentSubject];
-
-  let emoji = '😢', advice = '多刷几遍，你一定可以的！';
-  if (pct >= 90) { emoji = '🎉'; advice = '太棒了！学霸就是你！'; }
-  else if (pct >= 70) { emoji = '👍'; advice = '不错！再刷刷错题更稳！'; }
-  else if (pct >= 50) { emoji = '📚'; advice = '还有提升空间，继续加油！'; }
-
-  let html = `<div class="card result-hero">
-    <div style="font-size:64px">${emoji}</div>
-    <div class="result-score">${pct}%</div>
-    <div style="font-size:16px;color:var(--text2);margin-top:4px">${advice}</div>
-    <div style="font-size:13px;color:var(--text2);margin-top:2px">${subj.name}</div>
-    <div class="result-stats">
-      <div class="stat-item"><div class="stat-num">${total}</div><div class="stat-label">总答题</div></div>
-      <div class="stat-item correct"><div class="stat-num">✅ ${app.score.correct}</div><div class="stat-label">正确</div></div>
-      <div class="stat-item wrong"><div class="stat-num">❌ ${app.score.wrong}</div><div class="stat-label">错误</div></div>
-      <div class="stat-item"><div class="stat-num">${app.currentMode === 'exam' ? formatTime(app.examTotalTime - app.examTimeLeft) : app.questions.length}</div><div class="stat-label">${app.currentMode === 'exam' ? '用时' : '题量'}</div></div>
-    </div>
-  </div>`;
-
-  // Wrong questions review
-  const wrongQs = [];
-  for (let i = 0; i < app.answers.length; i++) {
-    const a = app.answers[i];
-    if (a && !a.isCorrect) wrongQs.push({ ...app.questions[i], userAnswer: a.userAnswer, index: i });
-  }
-
-  if (wrongQs.length > 0) {
-    html += `<div class="card"><div style="font-weight:700;margin-bottom:12px;font-size:16px">🔍 错题回顾 (${wrongQs.length}题)</div><div class="wrong-list">`;
-    for (const wq of wrongQs) {
-      html += `<div class="wrong-item">
-        <div class="w-stem">${wq.index + 1}. ${wq.stem}</div>
-        <div class="w-my">❌ 你的答案：${wq.userAnswer}</div>
-        <div class="w-answer">✅ 正确答案：${formatCorrectAnswer(wq)}</div>
-      </div>`;
-    }
-    html += `</div></div>`;
-  }
-
-  html += `<div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-    <button class="btn btn-primary" onclick="startQuiz()">🔄 再来一轮</button>
-    <button class="btn btn-outline" onclick="selectSubject('${app.currentSubject}')">📋 重新设置</button>
-    <button class="btn btn-outline" onclick="goHome()">🏠 返回首页</button>
-  </div>`;
-
-  document.getElementById('btnStats').classList.remove('hidden');
-  document.getElementById('btnWrongBook').classList.remove('hidden');
-
-  render(html);
-  updateNavStats();
-}
-
-function formatCorrectAnswer(q) {
-  if (q._type === 'danxuan') {
-    return `${q.answer}. ${q.options?.[q.answer] || ''}`;
-  } else if (q._type === 'duoxuan') {
-    return q.answer.split('').map(k => `${k}. ${q.options?.[k] || ''}`).join('；');
-  } else if (q._type === 'panduan') {
-    return q.answer;
-  } else if (q._type === 'tiankong') {
-    return (q.answers || []).join('；') || q.answer || '';
-  } else {
-    return q.answer || '(见解析)';
-  }
-}
-
-// ====== STATS PAGE ======
-function showStats() {
-  const storage = loadStorage();
-  let html = `<div class="card"><div style="font-weight:700;font-size:18px;margin-bottom:16px">📊 学习统计</div>`;
-
-  let grandDone = 0, grandCorrect = 0;
-  for (const [key, subj] of Object.entries(SUBJECTS)) {
-    const prog = storage[key] || {};
-    const done = prog.completed || 0;
-    const correct = prog.correct || 0;
-    const rate = done > 0 ? Math.round(correct / done * 100) : 0;
-    const wrongCount = (prog.wrongIds || []).length;
-    grandDone += done; grandCorrect += correct;
-    html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:6px">
-      <span>${subj.icon} <strong>${subj.name}</strong></span>
-      <span style="font-size:13px;color:var(--text2)">刷题 ${done} 次 | 正确率 ${rate}% | 错题 ${wrongCount} 道</span>
-    </div>`;
-  }
-
-  html += `<div style="text-align:center;margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-    <button class="btn btn-outline btn-sm" onclick="exportData()">📤 导出数据</button>
-    <button class="btn btn-outline btn-sm" onclick="importDataPrompt()">📥 导入数据</button>
-    <button class="btn btn-outline btn-sm" style="border-color:var(--danger);color:var(--danger)" onclick="resetAll()">🗑️ 重置进度</button>
-  </div></div>`;
-
-  html += `<button class="btn btn-outline btn-block" onclick="goHome()">🏠 返回首页</button>`;
-  render(html);
-}
-
-function exportData() {
-  const data = localStorage.getItem('quiz_platform') || '{}';
-  const blob = new Blob([data], {type: 'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'quiz_progress_backup.json';
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast('📤 数据已导出！');
-}
-
-function importDataPrompt() {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.json';
-  input.onchange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      try {
-        const data = JSON.parse(ev.target.result);
-        localStorage.setItem('quiz_platform', JSON.stringify(data));
-        showToast('📥 数据已导入！');
-        showStats();
-      } catch(ex) { showToast('❌ 文件格式错误'); }
-    };
-    reader.readAsText(file);
-  };
-  input.click();
-}
-
-function resetAll() {
-  if (confirm('确定要清除所有学习进度和错题记录吗？\n\n此操作不可恢复！')) {
-    localStorage.removeItem('quiz_platform');
-    showToast('🗑️ 已清除所有记录');
-    goHome();
-  }
-}
-
-// ====== WRONG QUESTION BOOK ======
-function showWrongBook() {
-  const storage = loadStorage();
-  let html = '';
-  let hasAny = false;
-
-  for (const [key, subj] of Object.entries(SUBJECTS)) {
-    const wrongIds = storage[key]?.wrongIds || [];
-    if (wrongIds.length === 0) continue;
-    hasAny = true;
-    html += `<div class="card" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <div><div style="font-weight:700">${subj.icon} ${subj.name}</div>
-      <div style="font-size:13px;color:var(--text2)">${wrongIds.length} 道错题</div></div>
-      <button class="btn btn-primary btn-sm" onclick="goWrongReview('${key}')">🔄 立即复习</button>
-    </div>`;
-  }
-
-  if (!hasAny) {
-    html = `<div class="card" style="text-align:center;padding:40px">
-      <div style="font-size:64px;margin-bottom:12px">🎉</div>
-      <div style="font-size:18px;font-weight:600">错题本为空</div>
-      <div style="color:var(--text2);margin-top:4px">继续保持，加油！</div>
-    </div>`;
-  }
-
-  html += `<button class="btn btn-outline btn-block" onclick="goHome()">🏠 返回首页</button>`;
-  render(html);
-}
-
-async function goWrongReview(subjectId) {
-  app.currentMode = 'wrong';
-  await selectSubject(subjectId);
-  startQuiz();
-}
-
-// ====== UTILITIES ======
-function updateNavStats() {
-  const storage = loadStorage();
-  let totalDone = 0, totalCorrect = 0, totalAll = 0;
-  for (const key of Object.keys(SUBJECTS)) {
-    const prog = storage[key] || {};
-    totalDone += prog.completed || 0;
-    totalCorrect += prog.correct || 0;
-    totalAll += prog.total || 0;
-  }
-  document.getElementById('navTotal').textContent = totalDone;
-  document.getElementById('navRate').textContent = totalAll > 0 ? Math.round(totalCorrect / totalAll * 100) + '%' : '-';
-}
-
-function showToast(msg) {
-  const el = document.createElement('div');
-  el.className = 'toast'; el.textContent = msg;
-  document.getElementById('toastContainer').appendChild(el);
-  setTimeout(() => el.remove(), 2000);
-}
-
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str || '';
-  return div.innerHTML;
-}
-
-// ====== THEME (3-mode cycle: Light -> Dark -> Rem -> Light) ======
-const THEMES = ['', 'dark', 'rem'];
-const THEME_ICONS = { '': '☀️', 'dark': '🌙', 'rem': '💙' };
-const THEME_NAMES = { '': '白天模式', 'dark': '黑夜模式', 'rem': '蕾姆主题' };
-
-function toggleTheme() {
-  const htmlEl = document.documentElement;
-  const current = htmlEl.getAttribute('data-theme') || '';
-  const idx = THEMES.indexOf(current);
-  const next = THEMES[(idx + 1) % THEMES.length];
-  htmlEl.setAttribute('data-theme', next);
-  localStorage.setItem('quiz_theme', next);
-  updateThemeBtn();
-}
-function updateThemeBtn() {
-  const current = document.documentElement.getAttribute('data-theme') || '';
-  const btn = document.getElementById('btnTheme');
-  if (btn) {
-    btn.textContent = THEME_ICONS[current] || '☀️';
-    btn.title = '当前：' + (THEME_NAMES[current] || '白天模式') + ' | 点击切换';
-  }
-  const isRem = current === 'rem';
-  const el = document.getElementById('remElements');
-  const qb = document.getElementById('remQuoteBar');
-  if (el) el.style.display = isRem ? 'block' : 'none';
-  if (qb) qb.style.display = isRem ? 'block' : 'none';
-  if (isRem) {
-    setTimeout(remEncourage, 1500);
-    setInterval(remEncourage, 45000);
-  }
-}
-(function() {
-  const saved = localStorage.getItem('quiz_theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-  setTimeout(() => {
-    updateThemeBtn();
-    if (saved === 'rem') {
-      const el = document.getElementById('remElements');
-      const qb = document.getElementById('remQuoteBar');
-      if (el) el.style.display = 'block';
-      if (qb) qb.style.display = 'block';
-      setTimeout(remEncourage, 1500);
+    <style>
+      @keyframes remBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+      @media (max-width:600px) { #remImg { width:70px !important; } #remSpeech { font-size:10px !important; padding:4px 8px !important; max-width:120px !important; } }
+    </style>
+    <script>
+      const REM_IMAGES = ['rem.jpg','rem2.jpg','rem3.jpg','rem4.jpg'];
+      const REM_QUOTES = ['加油！你可以的！','这题很简单，相信自己！','蕾姆相信你一定能做对！','累了就休息一下，蕾姆等你~','你已经很棒了，继续冲！','不要放弃，蕾姆在你身边！','认真读题，一定能选对！','期末算什么，刷就完了！','你的努力蕾姆都看在眼里呢~','休息是为了走更远的路','这波操作满分！继续继续！','就算错了也没关系，再来一次！','错题是成长的阶梯，上吧！','蕾姆的陪伴是最温暖的鼓励~'];
+      function remEncourage(){var s=document.getElementById('remSpeech');var img=document.getElementById('remImg');if(!s)return;s.textContent=REM_QUOTES[Math.floor(Math.random()*REM_QUOTES.length)];s.style.animation='none';s.offsetHeight;s.style.animation='remBounce 2.5s ease-in-out infinite';if(img){img.style.opacity='0';setTimeout(function(){img.src=REM_IMAGES[Math.floor(Math.random()*REM_IMAGES.length)];img.style.opacity='1'},200)}}
       setInterval(remEncourage, 45000);
-    }
-  }, 150);
-})();
+    </script>
 
-
-// ====== REM ENCOURAGEMENT ======
-const REM_QUOTES = [
-  '加油！你可以的！💪',
-  '这题很简单，相信自己！✨',
-  '蕾姆相信你一定能做对！💙',
-  '累了就休息一下，蕾姆等你~',
-  '你已经很棒了，继续冲！🌟',
-  '不要放弃，蕾姆在你身边！',
-  '认真读题，一定能选对！📖',
-  '又一个正确答案，不愧是你！🎉',
-  '鬼上身般的专注力！全力以赴！',
-  '姐姐大人也会为你骄傲的！',
-  '期末算什么，刷就完了！🔥',
-  '你的努力蕾姆都看在眼里呢~',
-  '休息是为了走更远的路 ☕',
-  '这波操作满分！继续继续！',
-  '蕾姆的幸福就是看着你进步！🥰',
-  '就算错了也没关系，再来一次！',
-  '错题是成长的阶梯，上吧！📈',
-  '你的坚持让蕾姆很感动呢~',
-];
-let remIntervalId = null;
-
-const REM_IMAGES = ['rem.jpg', 'rem2.jpg', 'rem3.jpg', 'rem4.jpg'];
-
-function remEncourage() {
-  const speech = document.getElementById('remSpeech');
-  const img = document.querySelector('.rem-img');
-  if (!speech) return;
-  // Random encouragement
-  const idx = Math.floor(Math.random() * REM_QUOTES.length);
-  speech.textContent = REM_QUOTES[idx];
-  speech.style.animation = 'none';
-  speech.offsetHeight;
-  speech.style.animation = 'remBounce 2.5s ease-in-out infinite';
-  // Random Rem image
-  if (img) {
-    const randImg = REM_IMAGES[Math.floor(Math.random() * REM_IMAGES.length)];
-    if (img.src !== randImg) {
-      img.style.opacity = '0';
-      setTimeout(() => {
-        img.src = randImg;
-        img.style.opacity = '1';
-      }, 200);
-    }
-  }
-}
-
-// ====== KEYBOARD SHORTCUTS ======
-document.addEventListener('keydown', (e) => {
-  if (!app.questions.length || app.currentIndex >= app.questions.length) return;
-  const q = app.questions[app.currentIndex];
-
-  // In input/textarea, only handle Enter
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-    if (e.key === 'Enter' && !e.shiftKey && !app.showAnswer) {
-      e.preventDefault(); submitAnswer();
-    }
-    return;
-  }
-
-  if (!app.showAnswer) {
-    // Option selection
-    if (q._type === 'danxuan') {
-      const keyMap = { 'a': 'A', 'b': 'B', 'c': 'C', 'd': 'D', 'e': 'E', '1': 'A', '2': 'B', '3': 'C', '4': 'D', '5': 'E' };
-      const opt = keyMap[e.key.toLowerCase()];
-      if (opt && q.options?.[opt] !== undefined) selectOption(opt);
-    } else if (q._type === 'duoxuan') {
-      const keyMap = { 'a': 'A', 'b': 'B', 'c': 'C', 'd': 'D', 'e': 'E' };
-      const opt = keyMap[e.key.toLowerCase()];
-      if (opt && q.options?.[opt] !== undefined) toggleMultiOption(opt);
-    } else if (q._type === 'panduan') {
-      if (e.key === '1' || e.key.toLowerCase() === 'a') selectTF('对');
-      if (e.key === '2' || e.key.toLowerCase() === 'b') selectTF('错');
-    }
-    if (e.key === 'Enter') { e.preventDefault(); submitAnswer(); }
-  } else {
-    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') {
-      e.preventDefault();
-      if (app.currentIndex < app.questions.length - 1) nextQuestion();
-      else finishQuiz();
-    }
-  }
-  if (e.key === 'ArrowLeft' && app.currentIndex > 0) { e.preventDefault(); jumpTo(app.currentIndex - 1); }
-  if (e.key === 'ArrowRight' && !app.showAnswer && app.currentIndex < app.questions.length - 1) { e.preventDefault(); jumpTo(app.currentIndex + 1); }
-  if (e.key === 'Escape') { goHome(); }
-});
-
-// ====== INIT ======
-updateNavStats();
-renderHome();
-</script>
-
-
-
-
-<div id="remElements" style="display:none">
-  <span class="rem-sparkle" style="top:15%;left:8%">✦</span>
-  <span class="rem-sparkle" style="top:30%;right:10%">✧</span>
-  <span class="rem-sparkle" style="top:55%;left:6%">⋆</span>
-  <span class="rem-sparkle" style="top:70%;right:8%">✦</span>
-  <span class="rem-sparkle" style="top:85%;left:12%">✧</span>
-  <div class="rem-container">
-    <div class="rem-speech" id="remSpeech">加油！你可以的！</div>
-    <div class="rem-chibi" id="remChibi" onclick="remEncourage()" title="点我获取鼓励！">
-      <img src="rem.jpg" alt="蕾姆" class="rem-img">
-    </div>
-  </div>
-</div>
 </body>
 </html>
