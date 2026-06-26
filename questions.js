@@ -6834,7 +6834,7 @@ window.QUESTION_BANK = {
         "C. U2",
         "D. U2"
       ],
-      "answer": "D"
+      "answer": "A"
     },
     {
       "id": "电力电子-单选题-67",
@@ -7282,7 +7282,7 @@ window.QUESTION_BANK = {
         "C. 0.125706018518519",
         "D. 0.0423726851851852"
       ],
-      "answer": "D"
+      "answer": "A"
     },
     {
       "id": "电力电子-单选题-99",
