@@ -1,4 +1,4 @@
-const bank = window.QUESTION_BANK || { questions: [] };
+function getBank() { return window.QUESTION_BANK || { questions: [] }; }
 const storageKey = "final-review-v3";
 const legacyKeys = ["final-review-v2", "final-review-v1"];
 const themeStorageKey = "final-review-theme";
@@ -196,11 +196,11 @@ function unique(items) {
 }
 
 function subjects() {
-  return unique(bank.questions.map((question) => question.subject));
+  return unique(getBank().questions.map((question) => question.subject));
 }
 
 function typesForSubject(subject) {
-  return unique(bank.questions.filter((question) => question.subject === subject).map((question) => question.type));
+  return unique(getBank().questions.filter((question) => question.subject === subject).map((question) => question.type));
 }
 
 function activeExam() {
@@ -227,7 +227,7 @@ function preferredType(subject) {
 }
 
 function scopedDeck(subject, type) {
-  return bank.questions.filter((question) => {
+  return getBank().questions.filter((question) => {
     const record = getRecord(question.id);
     return question.subject === subject && question.type === type && !record.skipped;
   });
@@ -282,7 +282,7 @@ function deckQuestions() {
 }
 
 function scopedQuestions() {
-  return bank.questions.filter((question) => question.subject === state.selectedSubject && question.type === state.selectedType);
+  return getBank().questions.filter((question) => question.subject === state.selectedSubject && question.type === state.selectedType);
 }
 
 function isSeen(question) {
@@ -373,7 +373,7 @@ function makeWrongBookSession() {
 
 function currentQuestion() {
   const id = state.sessionIds[state.sessionIndex];
-  return bank.questions.find((question) => question.id === id);
+  return getBank().questions.find((question) => question.id === id);
 }
 
 function clearAutoNextTimer() {
