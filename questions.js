@@ -1,6 +1,6 @@
 window.QUESTION_BANK = {
   "generatedFrom": "C:\\Users\\Administrator\\Desktop\\已整理; synced PLC from C:\\Users\\Administrator\\Desktop\\PLC_题库_整理版.docx; synced PLC from C:\\Users\\Administrator\\Desktop\\PLC_题库_整理版.docx; synced PLC from C:\\Users\\Administrator\\Desktop\\PLC_题库_整理版.docx; synced PLC from C:\\Users\\Administrator\\Desktop\\PLC_题库_整理版.docx; synced 单片机 from C:\\Users\\Administrator\\Desktop\\新建文件夹\\单片机20262.docx; synced 单片机 from C:\\Users\\Administrator\\Desktop\\新建文件夹\\单片机20262.docx; synced 电力电子 from C:\\Users\\Administrator\\Desktop\\题目文档 (电力电子) (2).docx; synced 自动化 from 4 docs; synced 自动化 from 4 docs; synced 自动化 from 4 docs; synced 自动化 from 4 docs; synced 自动化 from 4 docs; pruned unanswered automation calc questions; synced PLC and 自动化 from PDFs 2026-06-25; synced PLC and 自动化 from PDFs 2026-06-25; synced PLC and 自动化 from PDFs 2026-06-25; synced PLC and 自动化 from PDFs 2026-06-25; synced PLC and 自动化 from PDFs 2026-06-25; pruned PLC Mitsubishi questions 2026-06-25; synced PLC fill from docx 2026-06-26; synced PLC fill from docx 2026-06-26",
-  "total": 1433,
+  "total": 1028,
   "questions": [
     {
       "id": "PLC-单选题-PDF-1",
@@ -10850,6 +10850,538 @@ window.QUESTION_BANK = {
       "answer": "D",
       "images": []
     },
+    {
+      "id": "PLC-填空题-1",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "1",
+      "question": "变频器的加速时间是指从    所需的时间，减速时间是指从基本频率减至0HZ所需的时间。",
+      "options": [],
+      "answer": "0Hz 升至基本频率"
+    },
+    {
+      "id": "PLC-填空题-2",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "2",
+      "question": "变频器的组成可分为  和控制电路",
+      "options": [],
+      "answer": "主电路"
+    },
+    {
+      "id": "PLC-填空题-3",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "3",
+      "question": "变频器的加速时间是指从 0Hz 升至基本频率所需的时间，减速时间是指从         所需的时间。",
+      "options": [],
+      "answer": "基本频率f b 减至 0HZ"
+    },
+    {
+      "id": "PLC-填空题-4",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "4",
+      "question": "三菱系列变频器中 A 表示   S 表示 简易型 E 表示经济型 F 表示 节能型 。",
+      "options": [],
+      "answer": "通用型"
+    },
+    {
+      "id": "PLC-填空题-5",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "5",
+      "question": "三菱系列变频器中 A 表示 通用型 S 表示 简易型 E 表示   F 表示 节能型 。",
+      "options": [],
+      "answer": "经济型"
+    },
+    {
+      "id": "PLC-填空题-6",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "6",
+      "question": "FR-A500 型变频器有 5 种监视显示模式 监视模式 ，   ， 参数设定模式 ， 运行模式 ， 帮助模式 。",
+      "options": [],
+      "answer": "频率设定模式"
+    },
+    {
+      "id": "PLC-填空题-7",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "7",
+      "question": "FR-A500 型变频器有 5 种监视显示模式 监视模式 ， 频率设定模式 ， 参数设定模式 ，    ， 帮助模式 。",
+      "options": [],
+      "answer": "运行模式"
+    },
+    {
+      "id": "PLC-填空题-8",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "8",
+      "question": "变频器的组成可分为主电路和  。",
+      "options": [],
+      "answer": "控制电路"
+    },
+    {
+      "id": "PLC-填空题-9",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "9",
+      "question": "三菱系列变频器中 A 表示 通用型 S 表示 简易型 E 表示经济型 F 表示   。",
+      "options": [],
+      "answer": "节能型"
+    },
+    {
+      "id": "PLC-填空题-10",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "10",
+      "question": "FR-A500 型变频器有 5 种监视显示模式 监视模式 ， 频率设定模式 ， 参数设定模式 ， 运行模式 ，  。",
+      "options": [],
+      "answer": "帮助模式"
+    },
+    {
+      "id": "PLC-填空题-11",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "11",
+      "question": "频率控制是变频器的基本控制功能，控制变频器输出频率的方法有  、  、   、   、控制 。",
+      "options": [],
+      "answer": "面板控制；电位器控制；远程控制；外部端子"
+    },
+    {
+      "id": "PLC-填空题-12",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "12",
+      "question": "三菱系列变频器中 A 表示 通用型 S 表示   E 表示经济型 F 表示 节能型 。",
+      "options": [],
+      "answer": "简易型"
+    },
+    {
+      "id": "PLC-填空题-13",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "13",
+      "question": "有些设备需要转速分段运行，而且每段转速的上升、下降时间也不同，为了适应这种控制要求，变频器具有     功能和多种加减速时间设置功能。",
+      "options": [],
+      "answer": "多段速控制"
+    },
+    {
+      "id": "PLC-填空题-14",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "14",
+      "question": "普通车床的拖动系统包括 主 运动和  运动。",
+      "options": [],
+      "answer": "进给"
+    },
+    {
+      "id": "PLC-填空题-15",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "15",
+      "question": "变频器可以在本机控制，也可在远程控制。本机控制是由操作面板来设定运行参数，远控时，通过   来对变频调速系统进行外控操作。",
+      "options": [],
+      "answer": "计算机"
+    },
+    {
+      "id": "PLC-填空题-16",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "16",
+      "question": "变频调速时，基频以下的调速属于  调速，基频以上的属于 恒功率调速。",
+      "options": [],
+      "answer": "恒转矩"
+    },
+    {
+      "id": "PLC-填空题-17",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "17",
+      "question": "变频调速时，基频以下的调速属于恒转矩调速，基频以上的属于  调速。",
+      "options": [],
+      "answer": "恒功率"
+    },
+    {
+      "id": "PLC-填空题-18",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "18",
+      "question": "输入电源必须接到变频器输入端子 L1、L2、L3 上，电动机必须接到变频器输出端子  上。",
+      "options": [],
+      "answer": "u、v、w"
+    },
+    {
+      "id": "PLC-填空题-19",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "19",
+      "question": "FR-A500 型变频器有 5 种监视显示模式 ， 频率设定模式 ， 参数设定模式 ， 运行模式 ， 帮助模式 。",
+      "options": [],
+      "answer": "监视模式"
+    },
+    {
+      "id": "PLC-填空题-20",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "20",
+      "question": "普通车床的拖动系统包括 运动和进给运动。",
+      "options": [],
+      "answer": "主"
+    },
+    {
+      "id": "PLC-填空题-21",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "21",
+      "question": "FR-A500 型变频器有 5 种监视显示模式 监视模式 ， 频率设定模式 ，    ， 运行模式 ， 帮助模式 。",
+      "options": [],
+      "answer": "参数设定模式"
+    },
+    {
+      "id": "PLC-填空题-22",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "22",
+      "question": "变频器可以在本机控制，也可在远程控制。本机控制是由    来设定运行参数。远控时，通过 计算机来对变频调速系统进行外控操作。",
+      "options": [],
+      "answer": "操作面板"
+    },
+    {
+      "id": "PLC-填空题-23",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "23",
+      "question": "在现场总线控制系统中，总线设备主要分为7类:变送器/传感器;执行器;（    ）;监控/监视计算机;现场总线网桥/网关;其它现场总线设备。",
+      "options": [],
+      "answer": "控制器"
+    },
+    {
+      "id": "PLC-填空题-24",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "24",
+      "question": "进入“工业控制系统用现场总线”国际标准IEC61158（ED2.0）中的现场总线类型有（    ）。【任写一种】",
+      "options": [],
+      "answer": "Profibus"
+    },
+    {
+      "id": "PLC-填空题-25",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "25",
+      "question": "著名的以太网(Ethernet）就是采用(    )拓扑结构。",
+      "options": [],
+      "answer": "总线"
+    },
+    {
+      "id": "PLC-填空题-26",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "26",
+      "question": "两台PLC之间采用并行通信模式进行数据传送有（）和普通两种模式。",
+      "options": [],
+      "answer": "高速"
+    },
+    {
+      "id": "PLC-填空题-27",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "27",
+      "question": "通过  接口可以实现在变频器与变频器之间或变频器与计算机之间进行联网控制。",
+      "options": [],
+      "answer": "通讯"
+    },
+    {
+      "id": "PLC-填空题-28",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "28",
+      "question": "变频器的控制端子中设置 3 个开关，用其开关状态的组合来选择频率，一共可选择   个频率档。",
+      "options": [],
+      "answer": "8"
+    },
+    {
+      "id": "PLC-填空题-29",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "29",
+      "question": "频率控制功能是变频器的基本控制功能。控制变频器输出频率有以下几种方法：面板控制；  ；远程控制；外端子控制频率。",
+      "options": [],
+      "answer": "电位器控制"
+    },
+    {
+      "id": "PLC-填空题-30",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "30",
+      "question": "频率控制功能是变频器的基本控制功能。控制变频器输出频率有以下几种方法：面板控制；电位器控制；  ；外端子控制频率。",
+      "options": [],
+      "answer": "远程控制"
+    },
+    {
+      "id": "PLC-填空题-31",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "31",
+      "question": "频率控制功能是变频器的基本控制功能。控制变频器输出频率有以下几种方法：面板控制；电位器控制；远程控制；   。",
+      "options": [],
+      "answer": "外端子控制频率"
+    },
+    {
+      "id": "PLC-填空题-32",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "32",
+      "question": "频率控制功能是变频器的基本控制功能。控制变频器输出频率有以下几种方法：__  __ ；电位器控制 ；远程控制；外端子控制频率。",
+      "options": [],
+      "answer": "面板控制"
+    },
+    {
+      "id": "PLC-填空题-33",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "33",
+      "question": "在基于PLC开关量模式对变频器多段速控制系统中，变频器（），RM和RL外接线端子可进行控制速度的选择。",
+      "options": [],
+      "answer": "RH"
+    },
+    {
+      "id": "PLC-填空题-34",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "34",
+      "question": "FX2N系列PLC的DA模块的模拟量输出0~10VDC电压或（）电流。",
+      "options": [],
+      "answer": "4-20mA"
+    },
+    {
+      "id": "PLC-填空题-35",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "35",
+      "question": "FX2N系列PLC的DA模块的模拟量输出（）电压或4-20mA电流。",
+      "options": [],
+      "answer": "0-10VDC"
+    },
+    {
+      "id": "PLC-填空题-36",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "36",
+      "question": "在FX2N系列的PLC中，请写出一种应用指令（）可以将整数（例如20）转化为浮点数（20.0）。",
+      "options": [],
+      "answer": "FLT"
+    },
+    {
+      "id": "PLC-填空题-37",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "37",
+      "question": "在基于PLC模拟量模式对变频器多段速闭环控制系统中，若采用外部控制启动方式，需要设置（）为ON。",
+      "options": [],
+      "answer": "AU"
+    },
+    {
+      "id": "PLC-填空题-38",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "38",
+      "question": "三菱FX系列PLC内，FROM和()两个指令对模拟量模块进行读写控制。",
+      "options": [],
+      "answer": "TO"
+    },
+    {
+      "id": "PLC-填空题-39",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "39",
+      "question": "三菱FX系列PLC内，()和TO两个指令对模拟量模块进行读写控制。",
+      "options": [],
+      "answer": "FROM"
+    },
+    {
+      "id": "PLC-填空题-40",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "40",
+      "question": "两台PLC之间采用并行通信模式进行数据传送有高速和（）两种模式。",
+      "options": [],
+      "answer": "普通"
+    },
+    {
+      "id": "PLC-填空题-41",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "41",
+      "question": "当变频器发生故障时，需将其（）。",
+      "options": [],
+      "answer": "变频转工频"
+    },
+    {
+      "id": "PLC-填空题-42",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "42",
+      "question": "在现场总线控制系统中，总线设备主要分为6类:（）;执行器;控制器;监控/监视计算机;现场总线网桥/网关;其它现场总线设备。",
+      "options": [],
+      "answer": "变送器/传感器;"
+    },
+    {
+      "id": "PLC-填空题-43",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "43",
+      "question": "在现场总线控制系统中，总线设备主要分为6类:变送器/传感器;（）;控制器;监控/监视计算机;现场总线网桥/网关;其它现场总线设备。",
+      "options": [],
+      "answer": "执行器"
+    },
+    {
+      "id": "PLC-填空题-44",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "44",
+      "question": "在现场总线控制系统中，总线设备主要分为8类:变送器/传感器;执行器;控制器;（）;现场总线网桥/网关;其它现场总线设备。",
+      "options": [],
+      "answer": "监控/监视计算机"
+    },
+    {
+      "id": "PLC-填空题-45",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "45",
+      "question": "PROFIBUS现场总线由3个兼容部分组成，即       、PROFIBUS-PA和PROFIBUS-FMS。",
+      "options": [],
+      "answer": "PROFIBUS-DP"
+    },
+    {
+      "id": "PLC-填空题-46",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "46",
+      "question": "模拟量输入模块输入的-10～+10V电压转换后对应的数字为：          。",
+      "options": [],
+      "answer": "-27648～27648"
+    },
+    {
+      "id": "PLC-填空题-47",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "47",
+      "question": "西门子输出0~20mA模拟量对应的满量程范围的数据字范围是     。",
+      "options": [],
+      "answer": "0~27648"
+    },
+    {
+      "id": "PLC-填空题-48",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "48",
+      "question": "S7-1200 PLC通过集成的 PROFINET 接口支持 S7 通信，使用      方式。",
+      "options": [],
+      "answer": "单边通信"
+    },
+    {
+      "id": "PLC-填空题-49",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "49",
+      "question": "S7-1200 PLC 通过集成的 PROFINET 接口支持 S7 通信，使用单边通信方式，只要调用      通信指令即可。",
+      "options": [],
+      "answer": "客户端"
+    },
+    {
+      "id": "PLC-填空题-50",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "50",
+      "question": "S7-1200PLC 最多可以为用户提供       个高速计数器。",
+      "options": [],
+      "answer": "6"
+    },
+    {
+      "id": "PLC-填空题-51",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "51",
+      "question": "变频器的主电路包括   、   、   。",
+      "options": [],
+      "answer": "整流电路；储能电路；逆变电路"
+    },
+    {
+      "id": "PLC-填空题-52",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "52",
+      "question": "S7-1200 PLC 输出为24V高电压信号，当驱动器输入信号为5V时，可通过     的方式进行限流",
+      "options": [],
+      "answer": "串联电阻"
+    },
+    {
+      "id": "PLC-填空题-53",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "53",
+      "question": "选择回原点的模式，使用PTO方式时可选择模式有     种模式。",
+      "options": [],
+      "answer": "4"
+    },
+    {
+      "id": "PLC-填空题-54",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "54",
+      "question": "使用指令MC_Power 来启动/禁用轴，当参数StopMode =    时，轴紧急停止。",
+      "options": [],
+      "answer": "0"
+    },
+    {
+      "id": "PLC-填空题-55",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "55",
+      "question": "运动控制令“MC_Home”的输入参数“mode”=   时，会启动主动回原点。",
+      "options": [],
+      "answer": "3"
+    },
+    {
+      "id": "PLC-填空题-56",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "56",
+      "question": "S7-1200 PLC 控制步进电机需要采用    接法。",
+      "options": [],
+      "answer": "共阴极"
+    },
+    {
+      "id": "PLC-填空题-57",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "57",
+      "question": "编码器脉为A/B相脉冲输出，转一圈的脉冲数为800个脉冲，测量频率得到8000Hz，则转化为转速为      。",
+      "options": [],
+      "answer": "600 转/分钟"
+    },
+    {
+      "id": "PLC-填空题-58",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "58",
+      "question": "高速计数器计数类型选择周期模式，那么返回值的单位是     。",
+      "options": [],
+      "answer": "纳秒"
+    },
+    {
+      "id": "PLC-填空题-59",
+      "subject": "PLC",
+      "type": "填空题",
+      "sourceNo": "59",
+      "question": "S7-1200CPU的以太网接口支持的通信中       属于实时通信。",
+      "options": [],
+      "answer": "PROFINET IO"
+    }
+  ,
     {
       "id": "自动化-单选题-PDF-33",
       "subject": "自动化",
