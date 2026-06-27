@@ -2,7 +2,7 @@ function getBank() { return window.QUESTION_BANK || { questions: [] }; }
 const storageKey = "final-review-v3";
 const legacyKeys = ["final-review-v2", "final-review-v1"];
 const themeStorageKey = "final-review-theme";
-const subjectiveTypes = new Set(["填空题", "简答题", "MATLAB题", "计算绘图题"]);
+const subjectiveTypes = new Set(["填空题", "简答题", "MATLAB题", "计算绘图题", "名词解释", "图表题", "计算题"]);
 const minute = 60 * 1000;
 const hour = 60 * minute;
 const day = 24 * hour;
