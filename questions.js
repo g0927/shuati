@@ -1,6 +1,6 @@
 window.QUESTION_BANK = {
   "generatedFrom": "C:\\Users\\Administrator\\Desktop\\已整理; synced PLC from C:\\Users\\Administrator\\Desktop\\PLC_题库_整理版.docx; synced PLC from C:\\Users\\Administrator\\Desktop\\PLC_题库_整理版.docx; synced PLC from C:\\Users\\Administrator\\Desktop\\PLC_题库_整理版.docx; synced PLC from C:\\Users\\Administrator\\Desktop\\PLC_题库_整理版.docx; synced 单片机 from C:\\Users\\Administrator\\Desktop\\新建文件夹\\单片机20262.docx; synced 单片机 from C:\\Users\\Administrator\\Desktop\\新建文件夹\\单片机20262.docx; synced 电力电子 from C:\\Users\\Administrator\\Desktop\\题目文档 (电力电子) (2).docx; synced 自动化 from 4 docs; synced 自动化 from 4 docs; synced 自动化 from 4 docs; synced 自动化 from 4 docs; synced 自动化 from 4 docs; pruned unanswered automation calc questions; synced PLC and 自动化 from PDFs 2026-06-25; synced PLC and 自动化 from PDFs 2026-06-25; synced PLC and 自动化 from PDFs 2026-06-25; synced PLC and 自动化 from PDFs 2026-06-25; synced PLC and 自动化 from PDFs 2026-06-25; pruned PLC Mitsubishi questions 2026-06-25; synced PLC fill from docx 2026-06-26; synced PLC fill from docx 2026-06-26",
-  "total": 1312,
+  "total": 1298,
   "questions": [
     {
       "id": "PLC-单选题-PDF-1",
@@ -10878,42 +10878,6 @@ window.QUESTION_BANK = {
       "answer": "基本频率f b 减至 0HZ"
     },
     {
-      "id": "PLC-填空题-4",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "4",
-      "question": "三菱系列变频器中 A 表示   S 表示 简易型 E 表示经济型 F 表示 节能型 。",
-      "options": [],
-      "answer": "通用型"
-    },
-    {
-      "id": "PLC-填空题-5",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "5",
-      "question": "三菱系列变频器中 A 表示 通用型 S 表示 简易型 E 表示   F 表示 节能型 。",
-      "options": [],
-      "answer": "经济型"
-    },
-    {
-      "id": "PLC-填空题-6",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "6",
-      "question": "FR-A500 型变频器有 5 种监视显示模式 监视模式 ，   ， 参数设定模式 ， 运行模式 ， 帮助模式 。",
-      "options": [],
-      "answer": "频率设定模式"
-    },
-    {
-      "id": "PLC-填空题-7",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "7",
-      "question": "FR-A500 型变频器有 5 种监视显示模式 监视模式 ， 频率设定模式 ， 参数设定模式 ，    ， 帮助模式 。",
-      "options": [],
-      "answer": "运行模式"
-    },
-    {
       "id": "PLC-填空题-8",
       "subject": "PLC",
       "type": "填空题",
@@ -10923,24 +10887,6 @@ window.QUESTION_BANK = {
       "answer": "控制电路"
     },
     {
-      "id": "PLC-填空题-9",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "9",
-      "question": "三菱系列变频器中 A 表示 通用型 S 表示 简易型 E 表示经济型 F 表示   。",
-      "options": [],
-      "answer": "节能型"
-    },
-    {
-      "id": "PLC-填空题-10",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "10",
-      "question": "FR-A500 型变频器有 5 种监视显示模式 监视模式 ， 频率设定模式 ， 参数设定模式 ， 运行模式 ，  。",
-      "options": [],
-      "answer": "帮助模式"
-    },
-    {
       "id": "PLC-填空题-11",
       "subject": "PLC",
       "type": "填空题",
@@ -10948,15 +10894,6 @@ window.QUESTION_BANK = {
       "question": "频率控制是变频器的基本控制功能，控制变频器输出频率的方法有  、  、   、   、控制 。",
       "options": [],
       "answer": "面板控制；电位器控制；远程控制；外部端子"
-    },
-    {
-      "id": "PLC-填空题-12",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "12",
-      "question": "三菱系列变频器中 A 表示 通用型 S 表示   E 表示经济型 F 表示 节能型 。",
-      "options": [],
-      "answer": "简易型"
     },
     {
       "id": "PLC-填空题-13",
@@ -11013,15 +10950,6 @@ window.QUESTION_BANK = {
       "answer": "u、v、w"
     },
     {
-      "id": "PLC-填空题-19",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "19",
-      "question": "FR-A500 型变频器有 5 种监视显示模式 ， 频率设定模式 ， 参数设定模式 ， 运行模式 ， 帮助模式 。",
-      "options": [],
-      "answer": "监视模式"
-    },
-    {
       "id": "PLC-填空题-20",
       "subject": "PLC",
       "type": "填空题",
@@ -11029,15 +10957,6 @@ window.QUESTION_BANK = {
       "question": "普通车床的拖动系统包括 运动和进给运动。",
       "options": [],
       "answer": "主"
-    },
-    {
-      "id": "PLC-填空题-21",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "21",
-      "question": "FR-A500 型变频器有 5 种监视显示模式 监视模式 ， 频率设定模式 ，    ， 运行模式 ， 帮助模式 。",
-      "options": [],
-      "answer": "参数设定模式"
     },
     {
       "id": "PLC-填空题-22",
@@ -11148,33 +11067,6 @@ window.QUESTION_BANK = {
       "answer": "RH"
     },
     {
-      "id": "PLC-填空题-34",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "34",
-      "question": "FX2N系列PLC的DA模块的模拟量输出0~10VDC电压或（）电流。",
-      "options": [],
-      "answer": "4-20mA"
-    },
-    {
-      "id": "PLC-填空题-35",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "35",
-      "question": "FX2N系列PLC的DA模块的模拟量输出（）电压或4-20mA电流。",
-      "options": [],
-      "answer": "0-10VDC"
-    },
-    {
-      "id": "PLC-填空题-36",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "36",
-      "question": "在FX2N系列的PLC中，请写出一种应用指令（）可以将整数（例如20）转化为浮点数（20.0）。",
-      "options": [],
-      "answer": "FLT"
-    },
-    {
       "id": "PLC-填空题-37",
       "subject": "PLC",
       "type": "填空题",
@@ -11182,24 +11074,6 @@ window.QUESTION_BANK = {
       "question": "在基于PLC模拟量模式对变频器多段速闭环控制系统中，若采用外部控制启动方式，需要设置（）为ON。",
       "options": [],
       "answer": "AU"
-    },
-    {
-      "id": "PLC-填空题-38",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "38",
-      "question": "三菱FX系列PLC内，FROM和()两个指令对模拟量模块进行读写控制。",
-      "options": [],
-      "answer": "TO"
-    },
-    {
-      "id": "PLC-填空题-39",
-      "subject": "PLC",
-      "type": "填空题",
-      "sourceNo": "39",
-      "question": "三菱FX系列PLC内，()和TO两个指令对模拟量模块进行读写控制。",
-      "options": [],
-      "answer": "FROM"
     },
     {
       "id": "PLC-填空题-40",
