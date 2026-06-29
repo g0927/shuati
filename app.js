@@ -174,20 +174,20 @@ function haptic(pattern = 12) {
 function getRecord(id) {
   if (!state.progress[id]) state.progress[id] = {};
   const record = state.progress[id];
-  record.starred ??= false;
-  record.skipped ??= false;
-  record.grade ??= null;
-  record.count ??= 0;
-  record.firstSeen ??= null;
-  record.lastSeen ??= null;
-  record.objectiveResult ??= null;
-  record.dueAt ??= 0;
-  record.wrongCount ??= 0;
-  record.unsureCount ??= 0;
-  record.knownStreak ??= 0;
-  record.hardToRemember ??= false;
-  record.wrongBook ??= record.hardToRemember;
-  record.history ??= [];
+  record.starred = record.starred == null ? false : record.starred;
+  record.skipped = record.skipped == null ? false : record.skipped;
+  record.grade = record.grade == null ? null : record.grade;
+  record.count = record.count == null ? 0 : record.count;
+  record.firstSeen = record.firstSeen == null ? null : record.firstSeen;
+  record.lastSeen = record.lastSeen == null ? null : record.lastSeen;
+  record.objectiveResult = record.objectiveResult == null ? null : record.objectiveResult;
+  record.dueAt = record.dueAt == null ? 0 : record.dueAt;
+  record.wrongCount = record.wrongCount == null ? 0 : record.wrongCount;
+  record.unsureCount = record.unsureCount == null ? 0 : record.unsureCount;
+  record.knownStreak = record.knownStreak == null ? 0 : record.knownStreak;
+  record.hardToRemember = record.hardToRemember == null ? false : record.hardToRemember;
+  record.wrongBook = record.wrongBook != null ? record.wrongBook : record.hardToRemember;
+  record.history = record.history == null ? [] : record.history;
   return record;
 }
 
