@@ -787,7 +787,7 @@ function renderStudy() {
   setView("study");
   const question = currentQuestion();
   if (!question) {
-    renderComplete();
+    showResult();
     return;
   }
 
@@ -1215,10 +1215,13 @@ function init() {
     const delta = event.changedTouches[0].clientX - state.touchStartX;
     if (Math.abs(delta) > 56) moveDetail(delta > 0 ? -1 : 1);
   }, { passive: true });
-  els.questionArea.addEventListener("click", (event) => {
-    if (event.target.closest("button, summary, details, .option-item, .answer-box, .memory-panel")) return;
-    revealSubjectiveAnswer();
-  });
+	  function handleReveal(event) {
+	    if (event.target.closest("button, summary, details, .option-item, .answer-box, .memory-panel")) return;
+	    event.preventDefault();
+	    revealSubjectiveAnswer();
+	  }
+	  els.questionArea.addEventListener("click", handleReveal);
+	  els.questionArea.addEventListener("touchend", handleReveal, { passive: false });
   els.studyCard.addEventListener("touchstart", (event) => {
     const point = event.changedTouches[0];
     startStudySwipe(point.clientX, point.clientY, event.target);
